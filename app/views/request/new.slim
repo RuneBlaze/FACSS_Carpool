@@ -1,0 +1,44 @@
+= form_for :request, '/request/create', :id => 'create' do |f|
+  - if flash[:errors]
+      h3 创建错误！
+      ul
+        - flash[:errors].each do |e|
+          li= e
+  p
+    = f.label :name, :caption => "真实姓名"
+    = f.text_field :name
+  p
+    = f.label :email, :caption => "Email"
+    = f.email_field :email
+  p
+    = f.label :gender, :caption => "Gender"
+    = f.select(:gender, :options => ['male', 'female'])
+  p
+    = f.label :date, :caption => "Date"
+    = f.text_field :date
+  p
+    = f.label :time, :caption => "Start Time"
+    = f.text_field :time
+  p
+    = f.label :passengers, :caption => "People"
+    = f.text_field :passengers
+  p
+    = f.label :school, :caption => "School"
+    = f.text_field :school
+  p
+    = f.label :place, :caption => "Place"
+    = f.text_field :place
+  p
+    = f.label :phone, :caption => "Phone"
+    = f.text_field :phone
+  p
+    = f.label :weixin, :caption => "Weixin"
+    = f.text_field :weixin
+  p
+    = f.label :qq, :caption => "QQ"
+    = f.text_field :qq
+  p
+    = f.label :conf, :caption => "Conf Code"
+    = f.text_field :conf
+  p
+    = f.submit "Create", :class => "button"

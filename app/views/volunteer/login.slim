@@ -1,0 +1,9 @@
+= form_for :volunteer, '/volunteer/login', :id => 'login' do |f|
+  p
+    = f.label :email, :caption => "Email"
+    = f.text_field :email
+  p
+    = f.label :password, :caption => "password"
+    = f.password_field :password
+  p
+    = f.submit "Login", :class => "button"

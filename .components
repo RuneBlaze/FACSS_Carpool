@@ -1,0 +1,10 @@
+---
+:orm: datamapper
+:test: none
+:mock: none
+:script: none
+:renderer: slim
+:stylesheet: none
+:namespace: UncCarpool
+:migration_format: number
+:admin_renderer: slim

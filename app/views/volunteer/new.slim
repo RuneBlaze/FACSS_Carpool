@@ -1,0 +1,32 @@
+= form_for :volunteer, '/volunteer/create', :id => 'create' do |f|
+  - if flash[:errors]
+      h3 创建错误！
+      ul
+        - flash[:errors].each do |e|
+          li= e
+  p
+    = f.label :name, :caption => "真实姓名"
+    = f.text_field :name
+  p
+    = f.label :email, :caption => "Email"
+    = f.email_field :email
+  p
+    = f.label :password, :caption => "Password"
+    = f.password_field :password
+  p
+    = f.label :gender, :caption => "Gender"
+    = f.select(:gender, :options => ['male', 'female'])
+  p
+    = f.label :school, :caption => "School"
+    = f.text_field :school
+  p
+    = f.label :phone, :caption => "Phone"
+    = f.text_field :phone
+  p
+    = f.label :weixin, :caption => "Weixin"
+    = f.text_field :weixin
+  p
+    = f.label :qq, :caption => "QQ"
+    = f.text_field :qq
+  p
+    = f.submit "Create", :class => "button"
