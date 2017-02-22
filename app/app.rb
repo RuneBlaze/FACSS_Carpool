@@ -61,15 +61,6 @@ module UncCarpool
     #     render 'errors/500'
     #   end
     #
-    set :delivery_method, :test => {
-      :address              => "mail.cock.li",
-      :port                 =>  587,
-      :user_name            => 'unccarpool@8chan.co',
-      :password             => 'KCTI15<||,]4',
-      :authentication       => :plain,
-      :enable_starttls_auto => true
-    }
-
     set :delivery_method, :test
 
 
