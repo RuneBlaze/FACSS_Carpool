@@ -4,7 +4,7 @@ class Request
   # property <name>, <type>
   property :id, Serial
   property :name, String, :required => true
-  property :email, String, :required => true, :unique => true
+  property :email, String, :required => true#, :unique => true
   property :gender, Enum[:male, :female, :other], :default => :male
   property :date, String
   property :time, String

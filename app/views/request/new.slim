@@ -1,44 +1,64 @@
 = form_for :request, '/request/create', :id => 'create' do |f|
+  h1 Carpool 申请登记
   - if flash[:errors]
       h3 创建错误！
       ul
         - flash[:errors].each do |e|
           li= e
-  p
-    = f.label :name, :caption => "真实姓名"
-    = f.text_field :name
-  p
-    = f.label :email, :caption => "Email"
-    = f.email_field :email
-  p
-    = f.label :gender, :caption => "Gender"
-    = f.select(:gender, :options => ['male', 'female'])
-  p
-    = f.label :date, :caption => "Date"
-    = f.text_field :date
-  p
-    = f.label :time, :caption => "Start Time"
-    = f.text_field :time
-  p
-    = f.label :passengers, :caption => "People"
-    = f.text_field :passengers
-  p
-    = f.label :school, :caption => "School"
-    = f.text_field :school
-  p
-    = f.label :place, :caption => "Place"
-    = f.text_field :place
-  p
-    = f.label :phone, :caption => "Phone"
-    = f.text_field :phone
-  p
-    = f.label :weixin, :caption => "Weixin"
-    = f.text_field :weixin
-  p
-    = f.label :qq, :caption => "QQ"
-    = f.text_field :qq
-  p
-    = f.label :conf, :caption => "Conf Code"
-    = f.text_field :conf
+  .row
+    .six.columns
+      p
+        = f.label :name, :caption => "真实姓名"
+        = f.text_field :name, class: 'u-full-width'
+    .six.columns
+      p
+        = f.label :email, :caption => "Email"
+        = f.email_field :email, class: 'u-full-width'
+  .row
+    .six.columns
+      p
+        = f.label :gender, :caption => "Gender"
+        = f.select(:gender, :options => ['male', 'female'], class: 'u-full-width')
+  .row
+    .six.columns
+      p
+        = f.label :date, :caption => "Date"
+        = f.text_field :date, class: 'u-full-width'
+    .six.columns
+      p
+        = f.label :time, :caption => "Start Time"
+        = f.text_field :time, class: 'u-full-width'
+  .row
+    .six.columns
+      p
+        = f.label :passengers, :caption => "People"
+        = f.text_field :passengers, class: 'u-full-width'
+    .six.columns
+      p
+        = f.label :school, :caption => "School"
+        = f.text_field :school, class: 'u-full-width'
+  .row
+    .six.columns
+      p
+        = f.label :place, :caption => "Place"
+        = f.text_field :place, class: 'u-full-width'
+  .row
+    .six.columns
+      p
+        = f.label :phone, :caption => "Phone"
+        = f.text_field :phone, class: 'u-full-width'
+    .six.columns
+      p
+        = f.label :weixin, :caption => "Weixin"
+        = f.text_field :weixin, class: 'u-full-width'
+  .row
+    .six.columns
+      p
+        = f.label :qq, :caption => "QQ"
+        = f.text_field :qq, class: 'u-full-width'
+    .six.columns
+      p
+        = f.label :conf, :caption => "Conf Code"
+        = f.text_field :conf, class: 'u-full-width'
   p
     = f.submit "Create", :class => "button"

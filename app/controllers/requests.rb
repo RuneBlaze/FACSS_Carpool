@@ -20,7 +20,7 @@ UncCarpool::App.controllers :request do
   # end
 
   get :new do
-    render 'request/new'
+    render 'request/new', layout: 'site'
   end
 
   before :all do
@@ -32,13 +32,13 @@ UncCarpool::App.controllers :request do
 
   get :all do
     @reqs = Request.all()
-    render 'request/all'
+    render 'request/all', layout: 'site'
   end
 
   post :create do
     @req = Request.new(params[:sinatra_request])
     if @req.save
-
+      
     else
       flash[:errors] = @req.errors.map(&:to_s)
 

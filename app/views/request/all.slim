@@ -24,7 +24,7 @@ table
         td= r.time
         td= r.place
         td= r.school
-        td= r.volunteer != nil
+        td= r.volunteer ? r.volunteer.name : false
         td
           = form_for :volunteer, url_for(:volunteer, :take, :id => r.id), :id => 'take' do |f|
             p

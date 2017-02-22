@@ -1,32 +1,48 @@
-= form_for :volunteer, '/volunteer/create', :id => 'create' do |f|
+= form_for :volunteer, '/volunteer/create', :id => 'create', :class => 'u-full-width' do |f|
   - if flash[:errors]
       h3 创建错误！
       ul
         - flash[:errors].each do |e|
           li= e
+  h1 注册志愿者
+  h3 用户信息
+  .row
+    .six.columns
+      p
+        = f.label :name, :caption => "真实姓名*"
+        = f.text_field :name, class: 'u-full-width', required: true
+    .six.columns
+      p
+        = f.label :email, :caption => "电子邮件 Email*"
+        = f.email_field :email, class: 'u-full-width', required: true
+  .row
+    .six.columns
+      p
+        = f.label :password, :caption => "Password（6 到 64 位任意字符）*"
+        = f.password_field :password, class: 'u-full-width', min: 6, max: 64
+  h3 个人信息
+  .row
+    .six.columns
+      p
+        = f.label :gender, :caption => "性别*"
+        = f.select(:gender, :options => ['male', 'female'], class: 'u-full-width')
+    .six.columns
+      p
+        = f.label :school, :caption => "学校 / 机构"
+        = f.text_field :school, class: 'u-full-width'
+  .row
+    .six.columns
+      p
+        = f.label :phone, :caption => "电话号码 Phone*"
+        = f.text_field :phone, class: 'u-full-width', required: true, pattern: '[\d-]+'
+    .six.columns
+      p
+        = f.label :weixin, :caption => "Weixin（与微信至少填一项）"
+        = f.text_field :weixin, class: 'u-full-width'
+  .row
+    .six.columns
+      p
+        = f.label :qq, :caption => "QQ（与微信至少填一项）"
+        = f.text_field :qq, class: 'u-full-width'
   p
-    = f.label :name, :caption => "真实姓名"
-    = f.text_field :name
-  p
-    = f.label :email, :caption => "Email"
-    = f.email_field :email
-  p
-    = f.label :password, :caption => "Password"
-    = f.password_field :password
-  p
-    = f.label :gender, :caption => "Gender"
-    = f.select(:gender, :options => ['male', 'female'])
-  p
-    = f.label :school, :caption => "School"
-    = f.text_field :school
-  p
-    = f.label :phone, :caption => "Phone"
-    = f.text_field :phone
-  p
-    = f.label :weixin, :caption => "Weixin"
-    = f.text_field :weixin
-  p
-    = f.label :qq, :caption => "QQ"
-    = f.text_field :qq
-  p
-    = f.submit "Create", :class => "button"
+    = f.submit "注册", :class => "button"

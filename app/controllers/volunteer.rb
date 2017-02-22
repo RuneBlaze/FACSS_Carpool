@@ -2,16 +2,16 @@ UncCarpool::App.controllers :volunteer do
   enable :sessions
 
   get :new do
-    render 'volunteer/new'
+    render 'volunteer/new', layout: 'site'
   end
 
   get :all do
     @reqs = Request.all()
-    render 'volunteer/all'
+    render 'volunteer/all', layout: 'site'
   end
 
   get :login do
-    render 'volunteer/login'
+    render 'volunteer/login', layout: 'site'
   end
 
   before :except => [:login, :new, :create] do
@@ -22,7 +22,7 @@ UncCarpool::App.controllers :volunteer do
   end
 
   get :me do
-    render 'volunteer/me'
+    render 'volunteer/me', layout: 'site'
   end
 
   post :take, :with => :id do
@@ -48,8 +48,10 @@ UncCarpool::App.controllers :volunteer do
       return "404"
     else
       if r.volunteer.id == @user.id
+        @user.requests.delete_if {|it| it.id == r.id}
         r.volunteer = nil
-        r.save
+        r.save!
+        @user.save!
         return "forfeit"
       else
         return "403 you don't have that"
@@ -66,7 +68,12 @@ UncCarpool::App.controllers :volunteer do
       return "密码错误"
     end
     session[:uid] = v.id
-    return "login success!"
+    redirect '/volunteer/me'
+  end
+
+  post :logout do
+    session[:uid] = nil
+    return "logout"
   end
 
   post :create do
@@ -79,6 +86,4 @@ UncCarpool::App.controllers :volunteer do
       redirect '/volunteer/new'
     end
   end
-
-
 end

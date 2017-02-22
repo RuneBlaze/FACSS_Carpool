@@ -74,7 +74,7 @@ module UncCarpool
 
 
     get '/' do
-      render 'index'
+      render 'index', layout: 'site'
     end
   end
 end
