@@ -7,7 +7,7 @@ UncCarpool::App.controllers :request do
   before :all do
     @user = Volunteer.first(id: session[:uid])
     if !@user
-      return "403"
+      render('li', locals: {mes: 'volunteer not found'})
     end
   end
 
@@ -61,7 +61,18 @@ UncCarpool::App.controllers :request do
       r.confirmed = true
       r.save
 
-      return "email confirmed!"
+      render('li', locals: {mes: 'email confirmed!'})
+    end
+  end
+
+  get :conf do
+    conf_code = params[:conf]
+    @req = Request.first(conf: conf_code)
+    if @req
+      render '/request/edit'
+    else
+      flash[:errors] = ['未找到匹配 Confirmation Code']
+      redirect '/request/edit'
     end
   end
 
@@ -79,6 +90,17 @@ UncCarpool::App.controllers :request do
   post :create do
     @req = Request.new(params[:sinatra_request])
     if @req.save
+      r = @req
+      uri_conf = uri(url(:request, :confirm, code: r.email_code))
+      uri_alter = uri(url(:request, :conf, conf: r.conf))
+      email do
+        @req = r
+        from "facss_carpool_service@unc.edu"
+        to @req.email
+        content_type :html
+        subject "FACSS Carpool 请求确认"
+        render 'email/request_made', locals: {req: r, uri_conf: uri_conf, uri_alter: uri_alter}
+      end
       render 'request/success', layout: 'site'
     else
       flash[:errors] = @req.errors.map(&:to_s)

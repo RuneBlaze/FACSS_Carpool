@@ -16,6 +16,8 @@ source 'https://rubygems.org'
 # Project requirements
 gem 'rake'
 
+gem 'thin'
+
 # Component requirements
 gem 'activesupport', '>= 3.1'
 gem 'bcrypt'

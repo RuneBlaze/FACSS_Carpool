@@ -1,0 +1,8 @@
+h1 Carpool 请求志愿者匹配通知
+p 你好，你之前的请求（下附）
+== render 'email/_request_pub'
+p 已经被志愿者 #{@vol.name} 自愿匹配！志愿者具体信息已经附上：
+== render 'email/_volunteer_pub'
+
+p 一般志愿者会在一两天之内主动联系你，请主动查询自己留下的联系方式的动态。
+p 如果有需要，也可以主动联系志愿者。

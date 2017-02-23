@@ -1,6 +1,8 @@
 UncCarpool::App.controllers :volunteer do
   enable :sessions
 
+  layout :site
+
   get :new do
     render 'volunteer/new', layout: 'site'
   end
@@ -73,7 +75,17 @@ UncCarpool::App.controllers :volunteer do
         @user.save
         r.volunteer = @user
         r.save
-        return "taken"
+
+        email do
+          @vol = r.volunteer
+          @req = r
+          from "facss_carpool_service@unc.edu"
+          to r.email
+          content_type :html
+          subject "FACSS Carpool Service 匹配成功"
+          render 'email/request_taken'
+        end
+        render('li', locals: {mes: 'taken!'})
       end
     end
   end
@@ -81,14 +93,25 @@ UncCarpool::App.controllers :volunteer do
   post :forfeit, :with => :id do
     r = Request.first(id: params[:id].to_i)
     if !r
-      return "404"
+      return render('404', layout: 'site')
     else
       if r.volunteer.id == @user.id
         @user.requests.delete_if {|it| it.id == r.id}
         r.volunteer = nil
         r.save!
         @user.save!
-        return "forfeit"
+
+        email do
+          @vol = r.volunteer
+          @req = r
+          from "facss_carpool_service@unc.edu"
+          to r.email
+          content_type :html
+          subject "FACSS Carpool Service 志愿者取消匹配"
+          render 'email/request_forfeit'
+        end
+
+        render('li', locals: {mes: 'forfeit success!'})
       else
         return "403 you don't have that"
       end
@@ -112,7 +135,7 @@ UncCarpool::App.controllers :volunteer do
       r.confirmed = true
       r.save
 
-      return "email confirmed!"
+      render('li', locals: {mes: 'email confirmed!'})
     end
   end
 
@@ -138,11 +161,14 @@ UncCarpool::App.controllers :volunteer do
     @req = u #Hack
     if u.save
       session[:uid] = u.id
+      uri = uri(url(:volunteer, :confirm, code: u.email_code))
       email do
+        @vol = u
         from "facss_carpool_service@unc.edu"
         to u.email
-        subject "FACSS Carpool Service Email Confirmation"
-        body render('email/confirm')
+        content_type :html
+        subject "FACSS Carpool Service 志愿者邮箱激活"
+        render 'email/confirm', locals: {uri: uri, vol: u}
       end
       redirect '/volunteer/me'
     else
