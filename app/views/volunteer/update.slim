@@ -1,0 +1,55 @@
+- if flash[:errors]
+    h3 修改错误！
+    ul
+      - flash[:errors].each do |e|
+        li= e
+- if flash[:success]
+    h3 修改成功！
+    ul
+      - flash[:success].each do |s|
+        li= s
+= form_for :volunteer, '/volunteer/update', :id => 'update', :class => 'u-full-width' do |f|
+  h1 更改信息
+  h3 更改密码
+  .row
+    .six.columns
+      p
+        = f.label :password, :caption => "旧密码"
+        = f.password_field :old_password, class: 'u-full-width', required: true
+    .six.columns
+      p
+        = f.label :password, :caption => "新密码（6 到 64 位任意字符）"
+        = f.password_field :password, class: 'u-full-width', min: 6, max: 64, required: true
+  p
+    = f.submit "修改密码", :class => "button"
+= form_for :volunteer, '/volunteer/update', :id => 'update', :class => 'u-full-width' do |f|
+  h3 修改信息
+  .row
+    .six.columns
+      p
+        = f.label :gender, :caption => "性别"
+        = f.select(:gender, :options => [['男性', 'male'], ['女性', 'female']], class: 'u-full-width', value: @user.gender)
+    .six.columns
+      p
+        = f.label :gender, :caption => "年级"
+        = f.select(:gender, :options => [['本科生', 'undergrad'], ['研究生', 'grad'], ['PHD', 'phd'], ['校友', 'alumni'], ['访问学者', 'visiting'], ['教职','prof']], class: 'u-full-width', value: @user.grade)
+  .row
+    .six.columns
+      p
+        = f.label :phone, :caption => "电话号码 Phone"
+        = f.telephone_field :phone, class: 'u-full-width', pattern: '[\d-]+', value: @user.phone
+    .six.columns
+      p
+        = f.label :weixin, :caption => "微信"
+        = f.text_field :weixin, class: 'u-full-width', value: @user.weixin
+  .row
+    .six.columns
+      p
+        = f.label :place, :caption => "地址"
+        = f.text_field :place, class: 'u-full-width', value: @user.place
+    .six.columns
+      p
+        = f.label :memo, :caption => '备注'
+        = f.text_area :memo, class: 'u-full-width', value: @user.memo
+  p
+    = f.submit "修改信息", :class => "button"

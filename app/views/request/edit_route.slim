@@ -1,0 +1,15 @@
+h1 修改请求
+= form_for :request, '/request/conf', :id => 'conf' do |f|
+  - if flash[:errors]
+    ul
+      - flash[:errors].each do |e|
+        li= e
+  - if flash[:success]
+    ul
+      - flash[:success].each do |s|
+        li= s
+  p
+    = f.label :conf, :caption => "Confirmation Code"
+    = f.text_field :conf
+  p
+    = f.submit "登录", :class => "button-primary"

@@ -61,7 +61,15 @@ module UncCarpool
     #     render 'errors/500'
     #   end
     #
-    set :delivery_method, :test
+
+    set :delivery_method, :smtp => {
+      :address              => "smtp.postmarkapp.com",
+      :port                 => 587,
+      :user_name            => POSTMARK_KEY,
+      :password             => POSTMARK_KEY,
+      :authentication       => :plain,
+      :enable_starttls_auto => true
+    }
 
 
     get '/' do

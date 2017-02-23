@@ -89,6 +89,9 @@ GEM
       padrino-core (= 0.13.3.3)
     padrino-support (0.13.3.3)
       activesupport (>= 3.1)
+    postmark (1.10.0)
+      json
+      rake
     public_suffix (2.0.5)
     rack (1.6.5)
     rack-protection (1.5.3)
@@ -125,6 +128,7 @@ DEPENDENCIES
   dm-types
   dm-validations
   padrino (= 0.13.3.3)
+  postmark
   rake
   slim
 

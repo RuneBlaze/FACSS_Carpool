@@ -32,6 +32,8 @@ Padrino.configure_apps do
   set :protect_from_csrf, true
 end
 
+require_relative 'credentials.rb'
+
 # Mounts the core application for this project
 
 Padrino.mount("UncCarpool::Admin", :app_file => Padrino.root('admin/app.rb')).to("/admin")

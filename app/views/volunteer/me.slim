@@ -1,8 +1,11 @@
 p= "你好，志愿者 #{@user.name}"
 ul
   p= @user.requests.size
-a href="/request/all"
-  | 去接单
+
+ul
+  li: a href="/volunteer/update" 修改信息
+  li: a href="/volunteer/logout" 登出
+  li: a href="/request/all" 去接单
   
 table.u-full-width
   thread

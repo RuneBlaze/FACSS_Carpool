@@ -33,10 +33,6 @@
       p
         = f.label :passengers, :caption => "People"
         = f.text_field :passengers, class: 'u-full-width'
-    .six.columns
-      p
-        = f.label :school, :caption => "School"
-        = f.text_field :school, class: 'u-full-width'
   .row
     .six.columns
       p
@@ -51,14 +47,5 @@
       p
         = f.label :weixin, :caption => "Weixin"
         = f.text_field :weixin, class: 'u-full-width'
-  .row
-    .six.columns
-      p
-        = f.label :qq, :caption => "QQ"
-        = f.text_field :qq, class: 'u-full-width'
-    .six.columns
-      p
-        = f.label :conf, :caption => "Conf Code"
-        = f.text_field :conf, class: 'u-full-width'
   p
     = f.submit "Create", :class => "button"

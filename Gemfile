@@ -34,6 +34,8 @@ gem 'dm-core'
 # Padrino Stable Gem
 gem 'padrino', '0.13.3.3'
 
+gem 'postmark'
+
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'
 
