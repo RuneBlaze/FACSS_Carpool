@@ -1,4 +1,4 @@
-require 'SecureRandom'
+require 'securerandom'
 class Request
   include DataMapper::Resource
 
