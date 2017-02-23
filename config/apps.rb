@@ -32,7 +32,12 @@ Padrino.configure_apps do
   set :protect_from_csrf, true
 end
 
-require_relative 'credentials.rb'
+if k = ENV['POSTMARK_KEY']
+  POSTMARK_KEY = k
+else
+  require_relative 'credentials.rb'
+end
+
 
 # Mounts the core application for this project
 

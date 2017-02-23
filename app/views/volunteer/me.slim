@@ -1,36 +1,29 @@
 p= "你好，志愿者 #{@user.name}"
-ul
-  p= @user.requests.size
 
 ul
   li: a href="/volunteer/update" 修改信息
   li: a href="/volunteer/logout" 登出
   li: a href="/request/all" 去接单
-  
+
+h3 我目前接受的 CarPool 申请
 table.u-full-width
   thread
     tr
-      th 名字
       th 性别
       th 微信
-      th QQ
       th 日期
       th 时间
       th 地点
-      th 机构
       th 是否有志愿者确认
       th 放弃接单
   tbody
     - @user.requests.each do |r|
       tr
-        td= r.name
         td= r.gender
         td= r.weixin
-        td= r.qq
         td= r.date
         td= r.time
         td= r.place
-        td= r.school
         td= r.volunteer != nil
         td
           = form_for :volunteer, url_for(:volunteer, :forfeit, :id => r.id), :id => 'take' do |f|

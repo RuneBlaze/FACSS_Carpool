@@ -5,7 +5,7 @@
       ul
         - flash[:errors].each do |e|
           li= e
-  .row
+  .row2
     .six.columns
       p
         = f.label :name, :caption => "真实姓名"
@@ -14,12 +14,12 @@
       p
         = f.label :email, :caption => "Email"
         = f.email_field :email, class: 'u-full-width'
-  .row
+  .row2
     .six.columns
       p
         = f.label :gender, :caption => "Gender"
         = f.select(:gender, :options => ['male', 'female'], class: 'u-full-width')
-  .row
+  .row2
     .six.columns
       p
         = f.label :date, :caption => "Date"
@@ -28,17 +28,17 @@
       p
         = f.label :time, :caption => "Start Time"
         = f.text_field :time, class: 'u-full-width'
-  .row
+  .row2
     .six.columns
       p
         = f.label :passengers, :caption => "People"
         = f.text_field :passengers, class: 'u-full-width'
-  .row
+  .row2
     .six.columns
       p
         = f.label :place, :caption => "Place"
         = f.text_field :place, class: 'u-full-width'
-  .row
+  .row2
     .six.columns
       p
         = f.label :phone, :caption => "Phone"

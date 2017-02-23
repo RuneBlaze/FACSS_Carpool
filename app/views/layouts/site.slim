@@ -2,8 +2,24 @@ doctype 5
 head
   title UNC Carpool
   meta charset='utf-8'
-  link rel='stylesheet' href='/stylesheets/skeleton.css'
+  link rel='stylesheet' href='/stylesheets/milligram_zh.css'
   meta name='viewport' content='width=device-width, initial-scale=1'
 body
-  .container
-    == yield
+  .container style="padding-top: 2em;"
+    .row
+      .column
+        .clearfix
+          .float-left style="padding-top: 2em;" align="right"
+            h3 FACSS Carpool
+            p 首页
+            p 新 Carpool 申请
+            p 志愿者注册
+            p 志愿者登录
+            - if @user
+              h4 志愿者菜单
+              p: a href="/volunteer/me" 个人状态
+              p: a href="/request/all" 接受 CarPool 申请
+              p: a href="/volunteer/update" 修改个人信息
+              p: a href="/volunteer/logout" 登出
+      .column.column-75 style="padding-left: 3em; padding-top: 1em;"
+        == yield
