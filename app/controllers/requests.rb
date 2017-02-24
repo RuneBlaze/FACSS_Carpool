@@ -1,5 +1,7 @@
 UncCarpool::App.controllers :request do
 
+  layout :site
+  
   get :new do
     render 'request/new', layout: 'site'
   end

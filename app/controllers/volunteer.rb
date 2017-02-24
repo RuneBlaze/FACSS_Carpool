@@ -23,7 +23,7 @@ UncCarpool::App.controllers :volunteer do
     end
 
     if !@user.confirmed?
-      return "email not confirmed yet"
+      render('li', locals: {mes: 'volunteer not found'})
     end
   end
 
@@ -170,7 +170,8 @@ UncCarpool::App.controllers :volunteer do
         subject "FACSS Carpool Service 志愿者邮箱激活"
         render 'email/confirm', locals: {uri: uri, vol: u}
       end
-      redirect '/volunteer/me'
+      render('li', locals: {mes: '请去邮箱激活邮件！'})
+      #redirect '/volunteer/me'
     else
       flash[:errors] = u.errors.map(&:to_s)
       redirect '/volunteer/new'
