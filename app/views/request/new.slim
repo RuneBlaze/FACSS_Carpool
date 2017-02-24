@@ -22,30 +22,30 @@
   .row2
     .six.columns
       p
-        = f.label :date, :caption => "Date"
+        = f.label :date, :caption => "日期（MM-DD）"
         = f.text_field :date, class: 'u-full-width'
     .six.columns
       p
-        = f.label :time, :caption => "Start Time"
+        = f.label :time, :caption => "开始时间 （例如：08:00AM）"
         = f.text_field :time, class: 'u-full-width'
   .row2
     .six.columns
       p
-        = f.label :passengers, :caption => "People"
+        = f.label :passengers, :caption => "人数（整数）"
         = f.text_field :passengers, class: 'u-full-width'
   .row2
     .six.columns
       p
-        = f.label :place, :caption => "Place"
+        = f.label :place, :caption => "出发地点"
         = f.text_field :place, class: 'u-full-width'
   .row2
     .six.columns
       p
-        = f.label :phone, :caption => "Phone"
+        = f.label :phone, :caption => "电话号码 （XXX-XXX-XXXX）格式"
         = f.text_field :phone, class: 'u-full-width'
     .six.columns
       p
-        = f.label :weixin, :caption => "Weixin"
+        = f.label :weixin, :caption => "微信"
         = f.text_field :weixin, class: 'u-full-width'
   p
     = f.submit "Create", :class => "button"

@@ -12,9 +12,9 @@ body
           .float-left style="padding-top: 2em;" align="right"
             h3 FACSS Carpool
             p: a href="/" 首页
-            p 新 Carpool 申请
-            p 志愿者注册
-            p 志愿者登录
+            p: a href="/request/new" 新 Carpool 申请
+            p: a href="/volunteer/new" 志愿者注册
+            p: a href="/volunteer/login" 志愿者登录
             - if @user
               h4 志愿者菜单
               p: a href="/volunteer/me" 个人状态

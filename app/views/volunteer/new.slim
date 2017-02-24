@@ -36,8 +36,8 @@
         .row2
           .six.columns
             p
-              = f.label :phone, :caption => "电话号码 Phone*"
-              = f.telephone_field :phone, class: 'u-full-width', required: true, pattern: '[\d-]+'
+              = f.label :phone, :caption => "电话号码 Phone* （XXX-XXX-XXXX）格式"
+              = f.text_field :phone, class: 'u-full-width', required: true, pattern: '[\d-]+'
           .six.columns
             p
               = f.label :weixin, :caption => "微信"
