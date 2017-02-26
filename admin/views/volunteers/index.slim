@@ -1,0 +1,72 @@
+ul class="nav nav-tabs"
+  li class="active" = link_to tag_icon(:list, pat(:list)), url(:volunteers, :index)
+  li = link_to tag_icon(:plus, pat(:new)), url(:volunteers, :new)
+
+div class="tabs-content"
+  table class="table table-striped table-hover table-condensed" id="list"
+    thead
+      tr
+        th class='header list-menu'
+          div class='dropdown'
+            a href='#' class='list-menu-toggle.dropdown-toggle dropdown-toggle' data-toggle='dropdown'
+              = tag_icon :magic
+              span class='caret'
+            ul class='list-menu dropdown-menu' role='dropdown'
+              li class='list-menu-wrapper' = link_to tag_icon('check-square-o', pat(:select_all)), '#', :id => 'select-all', :class => 'list-menu-link'
+              li class='list-menu-wrapper list-menu-wrapper-disabled' = link_to tag_icon('square-o', pat(:deselect_all)), '#', :id => 'deselect-all', :class => 'list-menu-link list-menu-link-disabled'
+              li class='list-menu-divider divider'
+              li class='list-menu-wrapper list-menu-wrapper-disabled'
+                = link_to tag_icon('trash-o', pat(:delete_selected)), '#', :id => 'delete-selected', :class => 'list-menu-link list-menu-link-disabled'
+                div class='list-menu-popover-delete-selected popover right'
+                  div class='arrow'
+                  h3 class='popover-title' = pat(:delete_selected_title)
+                  div class='popover-content'
+                    = form_tag url(:volunteers, :destroy_many), :method => :delete do
+                      = hidden_field_tag :volunteer_ids, :'data-delete-many-ids' => true
+                      = submit_tag  pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small'
+                      div class='btn btn-default btn-small cancel' = pat(:cancel)
+        th class='header' = mat(:volunteer, :id)
+        th class='header' = mat(:volunteer, :email)
+        th class='header' = mat(:volunteer, :password)
+        th class='header' = mat(:volunteer, :name)
+        th class='header' = mat(:volunteer, :gender)
+        th class='header' = mat(:volunteer, :place)
+        th class='header' = mat(:volunteer, :grade)
+        th class='header' = mat(:volunteer, :school)
+        th class='header' = mat(:volunteer, :phone)
+        th class='header' = mat(:volunteer, :weixin)
+        th class='header' = mat(:volunteer, :memo)
+        th class='header' = mat(:volunteer, :confirmed)
+        th class='header' = mat(:volunteer, :email_code)
+        th class='header' = mat(:volunteer, :password_token)
+        th class='header list-row-action-header'
+
+    tbody
+      -@volunteers.each do |volunteer|
+        tr class='list-row'
+          td class='list-column list-selectable' = check_box_tag 'volunteer_ids[]', :value => volunteer.id, :class => 'list-selectable-checkbox'
+          td class='list-column' = volunteer.id
+          td class='list-column' = volunteer.email
+          td class='list-column' = volunteer.password
+          td class='list-column' = volunteer.name
+          td class='list-column' = volunteer.gender
+          td class='list-column' = volunteer.place
+          td class='list-column' = volunteer.grade
+          td class='list-column' = volunteer.school
+          td class='list-column' = volunteer.phone
+          td class='list-column' = volunteer.weixin
+          td class='list-column' = volunteer.memo
+          td class='list-column' = volunteer.confirmed ? tag_icon(:ok) : tag_icon(:remove)
+          td class='list-column' = volunteer.email_code
+          td class='list-column' = volunteer.password_token
+          td class='list-column list-row-action'
+            div class='list-row-action-wrapper'
+              = link_to tag_icon(:edit), :href => url(:volunteers, :edit, :id => volunteer.id), :rel => :tooltip, :title => "#{pat(:edit)} volunteer", :class => 'list-row-action-wrapper-link'
+              = link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} volunteer", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
+              div class='popover list-row-action-popover-delete-one left'
+                div class='arrow'
+                h3 class='popover-title' = pat(:delete, :model => "volunteer")
+                div class='popover-content'
+                  = form_tag url(:volunteers, :destroy, :id => volunteer.id), :method => :delete do
+                    = submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
+                    div class='btn btn-default btn-small cancel' = pat(:cancel)

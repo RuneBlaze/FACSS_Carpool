@@ -14,6 +14,7 @@ table.u-full-width
       th 日期
       th 时间
       th 地点
+      th 人数
       th 是否有志愿者确认
       th 放弃接单
   tbody
@@ -24,6 +25,7 @@ table.u-full-width
         td= r.date
         td= r.time
         td= r.place
+        th= r.passengers
         td= r.volunteer != nil
         td
           = form_for :volunteer, url_for(:volunteer, :forfeit, :id => r.id), :id => 'take' do |f|

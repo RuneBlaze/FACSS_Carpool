@@ -1,0 +1,85 @@
+- error = @request.errors.key?(:name) && @request.errors[:name].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :name, :class => 'control-label'
+  div class='controls'
+    = f.text_field :name, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    span class='help-inline' = error ? f.error_message_on(:name, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:email) && @request.errors[:email].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :email, :class => 'control-label'
+  div class='controls'
+    = f.text_field :email, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:email, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:gender) && @request.errors[:gender].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :gender, :class => 'control-label'
+  div class='controls'
+    = f.text_field :gender, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:gender, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:date) && @request.errors[:date].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :date, :class => 'control-label'
+  div class='controls'
+    = f.text_field :date, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:date, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:time) && @request.errors[:time].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :time, :class => 'control-label'
+  div class='controls'
+    = f.text_field :time, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:time, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:passengers) && @request.errors[:passengers].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :passengers, :class => 'control-label'
+  div class='controls'
+    = f.text_field :passengers, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:passengers, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:place) && @request.errors[:place].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :place, :class => 'control-label'
+  div class='controls'
+    = f.text_field :place, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:place, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:phone) && @request.errors[:phone].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :phone, :class => 'control-label'
+  div class='controls'
+    = f.text_field :phone, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:phone, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:weixin) && @request.errors[:weixin].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :weixin, :class => 'control-label'
+  div class='controls'
+    = f.text_field :weixin, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:weixin, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:conf) && @request.errors[:conf].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :conf, :class => 'control-label'
+  div class='controls'
+    = f.text_field :conf, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:conf, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:confirmed) && @request.errors[:confirmed].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :confirmed, :class => 'control-label'
+  div class='controls'
+    = f.check_box :confirmed, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:confirmed, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:email_code) && @request.errors[:email_code].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :email_code, :class => 'control-label'
+  div class='controls'
+    = f.text_field :email_code, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:email_code, :class => 'text-error') : pat(:example)
+- error = @request.errors.key?(:volunteer_id) && @request.errors[:volunteer_id].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :volunteer_id, :class => 'control-label'
+  div class='controls'
+    = f.text_field :volunteer_id, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:volunteer_id, :class => 'text-error') : pat(:example)
+
+div class="form-actions"
+  = f.submit pat(:save), :class => 'btn btn-primary'
+  |&nbsp;
+  = f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  |&nbsp;
+  = link_to pat(:cancel), url(:requests, :index), :class => 'btn btn-default'

@@ -10,6 +10,7 @@ table
       th 日期
       th 时间
       th 地点
+      th 人数
       / th 机构
       th 是否有志愿者确认
       th 我要接单
@@ -23,8 +24,9 @@ table
         td= r.date
         td= r.time
         td= r.place
+        td= r.passengers
         / td= r.school
-        td= r.volunteer ? r.volunteer.name : false
+        td= !r.volunteer.nil?
         td
           = form_for :volunteer, url_for(:volunteer, :take, :id => r.id), :id => 'take' do |f|
             p
