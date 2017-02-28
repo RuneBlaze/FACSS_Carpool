@@ -13,13 +13,7 @@ UncCarpool::App.controllers :request do
     end
   end
 
-  before do
-    unless @user
-      if session[:uid]
-        @user = Volunteer.first(id: session[:uid])
-      end
-    end
-  end
+
 
   get :all do
     @reqs = Request.all(confirmed: true)
@@ -71,7 +65,7 @@ UncCarpool::App.controllers :request do
       r.confirmed = true
       r.save
 
-      render('li', locals: {mes: 'email confirmed!'})
+      render('li', locals: {mes: 'confirmed!'})
     end
   end
 
@@ -115,15 +109,27 @@ UncCarpool::App.controllers :request do
     end
   end
 
-  post :cancel, with: :conf do
-    r = Request.first(conf: conf)
+  post :delete do
+    return "cancel failed" if params[:sinatra_request][:yes] == "0"
+    r = Request.first(conf: params[:sinatra_request][:conf])
+    vol = r.volunteer
     unless (r.volunteer.nil?)
       r.volunteer.requests.delete_if {|it| it.id == r.id}
       r.volunteer.save!
       r.volunteer = nil
       r.save!
-      render('li', locals: {mes: '已经被主动取消'})
     end
+
+    email do
+      @req = r
+      from "facss_carpool_service@unc.edu"
+      to vol.email
+      content_type :html
+      subject "FACSS Carpool 接受请求被主动取消"
+      render 'email/request_made', locals: {req: r, vol: vol}
+    end
+    r.destroy!
+    render('li', locals: {mes: '已经被主动取消'})
   end
 
   post :create do

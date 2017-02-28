@@ -1,1 +1,15 @@
+h2 FACSS Carpool 系统
+p 目前一切功能应该都可以使用，但是请各位好好测试。
+p 目前为止的全站信息如下：
 
+table
+  thread
+    tr
+      th 需分配请求
+      th 总共请求
+      th 志愿者总数
+  tbody
+    tr
+      td= Request.all(volunteer: nil).size
+      td= Request.all().size
+      td= Volunteer.all.size

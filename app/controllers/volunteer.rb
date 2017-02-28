@@ -4,16 +4,16 @@ UncCarpool::App.controllers :volunteer do
   layout :site
 
   get :new do
-    render 'volunteer/new', layout: 'site'
+    render 'volunteer/new'
   end
 
   get :all do
     @reqs = Request.all()
-    render 'volunteer/all', layout: 'site'
+    render 'volunteer/all'
   end
 
   get :login do
-    render 'volunteer/login', layout: 'site'
+    render 'volunteer/login'
   end
 
   before :except => [:login, :new, :create, :confirm] do
@@ -159,7 +159,7 @@ UncCarpool::App.controllers :volunteer do
 
   post :logout do
     session[:uid] = nil
-    return "logout"
+    render('li', locals: {mes: '登出成功！'})
   end
 
   post :create do

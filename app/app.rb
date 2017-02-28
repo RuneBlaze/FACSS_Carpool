@@ -71,6 +71,14 @@ module UncCarpool
       :enable_starttls_auto => true
     }
 
+    before do
+      unless @user
+        if session[:uid]
+          @user = Volunteer.first(id: session[:uid])
+        end
+      end
+    end
+
 
     get '/' do
       render 'index', layout: 'site'
