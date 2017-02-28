@@ -1,33 +1,34 @@
-p= "你好，志愿者 #{@user.name}"
+h1 Dashboard
 
-ul
-  li: a href="/volunteer/update" 修改信息
-  li: a href="/volunteer/logout" 登出
-  li: a href="/request/all" 去接单
+p 你好，志愿者 #{@user.name}。左边菜单栏可以使用 Carpool 系统的各种功能，也可以现在直接去<a href="/request/all">接受 Carpool 申请</a>。
+
+
+/ ul
+/   li: a href="/volunteer/update" 修改信息
+/   li: a href="/volunteer/logout" 登出
+/   li: a href="/request/all" 去接单
 
 h3 我目前接受的 CarPool 申请
+p 总数：#{@user.requests.size}，总乘客数量：#{@user.passengers_count} / #{@user.max_passengers}
 table.u-full-width
   thread
     tr
-      th 性别
       th 微信
       th 日期
       th 时间
       th 地点
       th 人数
-      th 是否有志愿者确认
       th 放弃接单
   tbody
     - @user.requests.each do |r|
       tr
-        td= r.gender
         td= r.weixin
         td= r.date
         td= r.time
         td= r.place
         th= r.passengers
-        td= r.volunteer != nil
         td
-          = form_for :volunteer, url_for(:volunteer, :forfeit, :id => r.id), :id => 'take' do |f|
-            p
-              = f.submit "放弃", :class => "button"
+          - if after_deadline?
+            p 不可放弃
+          - else
+            a href=url_for(:request, :action, id: r.id, type: "forfeit") 取消

@@ -5,51 +5,62 @@
       ul
         - flash[:errors].each do |e|
           li= e
-  .row
+  .row2
     p
       = f.label :conf, caption: "Confirmation Code"
       = f.text_field :conf, readonly: true, value: @req.conf
-  .row
+  .row2
     .six.columns
       p
         = f.label :name, :caption => "真实姓名"
         = f.text_field :name, class: 'u-full-width', value: @req.name
     .six.columns
       p
-        = f.label :email, :caption => "Email"
+        = f.label :email, :caption => "电子邮件"
         = f.email_field :email, class: 'u-full-width', value: @req.email
-  .row
+  .row2
     .six.columns
       p
-        = f.label :gender, :caption => "Gender"
+        = f.label :gender, :caption => "性别"
         = f.select(:gender, :options => ['male', 'female'], class: 'u-full-width', value: @req.gender)
-  .row
+  .row2
     .six.columns
       p
-        = f.label :date, :caption => "Date"
+        = f.label :date, :caption => "日期"
         = f.text_field :date, class: 'u-full-width', value: @req.date
     .six.columns
       p
-        = f.label :time, :caption => "Start Time"
+        = f.label :time, :caption => "开始时间"
         = f.text_field :time, class: 'u-full-width', value: @req.time
-  .row
+  .row2
     .six.columns
       p
-        = f.label :passengers, :caption => "People"
-        = f.text_field :passengers, class: 'u-full-width', value: @req.passengers
-  .row
+        = f.label :passengers, :caption => "人数（如果志愿者剩余人数不足会更改失败）"
+        = f.number_field :passengers, class: 'u-full-width', value: @req.passengers
+  .row2
     .six.columns
       p
-        = f.label :place, :caption => "Place"
+        = f.label :place, :caption => "出发地点"
         = f.text_field :place, class: 'u-full-width', value: @req.place
-  .row
+  .row2
     .six.columns
       p
-        = f.label :phone, :caption => "Phone"
+        = f.label :phone, :caption => "电话号码"
         = f.text_field :phone, class: 'u-full-width', value: @req.phone
     .six.columns
       p
-        = f.label :weixin, :caption => "Weixin"
+        = f.label :weixin, :caption => "微信"
         = f.text_field :weixin, class: 'u-full-width', value: @req.weixin
   p
     = f.submit "修改", :class => "button"
+= form_for :request, '/request/delete', :id => 'delete' do |f|
+  h3 Carpool 申请撤销申请
+  p style="display: none;"
+    = f.label :conf, caption: "Confirmation Code"
+    = f.text_field :conf, readonly: true, value: @req.conf
+  p 这是一个不可逆转的操作，请确认之后执行。
+  p
+    = f.label :yes, caption: "确认撤销并且删除 Carpool 申请"
+    = f.check_box :yes
+  p
+    = f.submit "删除 Carpool 申请", :class => "button"

@@ -13,13 +13,17 @@ body
             h3 FACSS Carpool
             p: a href="/" 首页
             p: a href="/request/new" 新 Carpool 申请
-            p: a href="/volunteer/new" 志愿者注册
-            p: a href="/volunteer/login" 志愿者登录
+            - unless @user
+              p: a href="/volunteer/new" 志愿者注册
+              p: a href="/volunteer/login" 志愿者登录
             - if @user
               h4 志愿者菜单
-              p: a href="/volunteer/me" 个人状态
+              p: a href="/volunteer/me" 个人 Dashboard
               p: a href="/request/all" 接受 CarPool 申请
               p: a href="/volunteer/update" 修改个人信息
               p: a href="/volunteer/logout" 登出
       .column.column-75 style="padding-left: 3em; padding-top: 1em;"
         == yield
+    .footer
+      hr
+      p== DEADLINE_END.strftime("当前活动日期：%Y年%m月%d日 %I:%M%p") + "<br>活动日期 #{DEADLINE_RANGE.to_i} 日前截止 Carpool 申请放弃" 

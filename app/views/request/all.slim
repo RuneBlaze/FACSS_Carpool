@@ -1,33 +1,26 @@
-p= @user.requests.size
+h1 请求总览
 
 table
   thread
     tr
-      / th 名字
-      th 性别
+      / th 性别
       th 微信
-      / th QQ
       th 日期
       th 时间
       th 地点
       th 人数
-      / th 机构
-      th 是否有志愿者确认
-      th 我要接单
+      th 接受请求
   tbody
-    - @reqs.each do |r|
+    - @reqs.select{|it| it.volunteer.nil? }.each do |r|
       tr
-        / td= r.name
-        td= r.gender
+        / td= r.gender
         td= r.weixin
-        / td= r.qq
         td= r.date
         td= r.time
         td= r.place
         td= r.passengers
-        / td= r.school
-        td= !r.volunteer.nil?
         td
-          = form_for :volunteer, url_for(:volunteer, :take, :id => r.id), :id => 'take' do |f|
-            p
-              = f.submit "接单", :class => "button"
+          - if @user.can_take_request?(r)
+            a href=url_for(:request,:action, id: r.id, type: "take") 接受
+          - else
+            span 超额

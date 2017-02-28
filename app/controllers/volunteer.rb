@@ -1,5 +1,5 @@
 UncCarpool::App.controllers :volunteer do
-  enable :sessions
+
 
   layout :site
 
@@ -47,17 +47,19 @@ UncCarpool::App.controllers :volunteer do
       if @user.save
         redirect 'volunteer/update'
       else
-        flash[:errors] = @req.errors.map(&:to_s)
+        flash[:errors] = @user.errors.map(&:to_s)
         redirect '/volunteer/update'
       end
     else
+
       attrs = params[:volunteer]
       @user.update(attrs)
 
       if @user.save
+        flash[:success] = ["修改个人信息成功！"]
         redirect 'volunteer/update'
       else
-        flash[:errors] = @req.errors.map(&:to_s)
+        flash[:errors] = @user.errors.map(&:to_s)
         redirect '/volunteer/update'
       end
     end
@@ -91,6 +93,9 @@ UncCarpool::App.controllers :volunteer do
   end
 
   post :forfeit, :with => :id do
+    if after_deadline?
+      return "403 after deadline"
+    end
     r = Request.first(id: params[:id].to_i)
     if !r
       return render('404', layout: 'site')
@@ -135,7 +140,8 @@ UncCarpool::App.controllers :volunteer do
       r.confirmed = true
       r.save
 
-      render('li', locals: {mes: 'email confirmed!'})
+      session[:uid] = r.id
+      redirect '/volunteer/me'
     end
   end
 
@@ -170,7 +176,7 @@ UncCarpool::App.controllers :volunteer do
         subject "FACSS Carpool Service 志愿者邮箱激活"
         render 'email/confirm', locals: {uri: uri, vol: u}
       end
-      render('li', locals: {mes: '请去邮箱激活邮件！'})
+      render('li', locals: {mes: '注册成功，请去邮箱激活邮件。'})
       #redirect '/volunteer/me'
     else
       flash[:errors] = u.errors.map(&:to_s)

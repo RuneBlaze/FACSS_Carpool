@@ -24,6 +24,7 @@
               = f.label :password, :caption => "密码（6 到 64 位任意字符）*"
               = f.password_field :password, class: 'u-full-width', min: 6, max: 64, required: true
         h3 个人信息
+        p 以下信息之后都可以在个人页面进行更改。
         .row2
           .six.columns
             p
@@ -36,8 +37,8 @@
         .row2
           .six.columns
             p
-              = f.label :phone, :caption => "电话号码 Phone* （XXX-XXX-XXXX）格式"
-              = f.text_field :phone, class: 'u-full-width', required: true, pattern: '[\d-]+'
+              = f.label :phone, :caption => "电话号码 Phone* （XXXXXXXXXX）格式"
+              = f.phone_field :phone, class: 'u-full-width', required: true, pattern: '[\d]+'
           .six.columns
             p
               = f.label :weixin, :caption => "微信"
@@ -51,5 +52,8 @@
             p
               = f.label :memo, :caption => '备注'
               = f.text_area :memo, class: 'u-full-width'
+        p
+          = f.label :max_passengers, :caption => "最大接受人数 （整数）"
+          = f.number_field :max_passengers, class: 'u-full-widthx'
         p
           = f.submit "注册", :class => "button"

@@ -447,4 +447,10 @@ img {
 .float-right {
   float: right; }
 
+.footer {
+  text-align: center;
+  color: #999;
+  font-size: 0.7em;
+}
+
 /*# sourceMappingURL=milligram_zh.css.map */

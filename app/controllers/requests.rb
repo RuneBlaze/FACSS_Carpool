@@ -1,7 +1,7 @@
 UncCarpool::App.controllers :request do
 
   layout :site
-  
+
   get :new do
     render 'request/new', layout: 'site'
   end
@@ -10,6 +10,14 @@ UncCarpool::App.controllers :request do
     @user = Volunteer.first(id: session[:uid])
     if !@user
       render('li', locals: {mes: 'volunteer not found'})
+    end
+  end
+
+  before do
+    unless @user
+      if session[:uid]
+        @user = Volunteer.first(id: session[:uid])
+      end
     end
   end
 
@@ -67,6 +75,24 @@ UncCarpool::App.controllers :request do
     end
   end
 
+  get :action, with: [:id, :type] do
+    c = params[:type]
+    r = Request.first(id: params[:id].to_i)
+    if !r
+      return "bye"
+    end
+
+    case c
+    when 'take'
+      render('request/confirm_req', locals: {type: 'take', r: r})
+    when 'forfeit'
+      render('request/confirm_req', locals: {type: 'forfeit', r: r})
+    else
+      return 'not found'
+    end
+
+  end
+
   get :conf do
     conf_code = params[:conf]
     @req = Request.first(conf: conf_code)
@@ -86,6 +112,17 @@ UncCarpool::App.controllers :request do
     else
       flash[:errors] = ['未找到匹配 Confirmation Code']
       redirect '/request/edit'
+    end
+  end
+
+  post :cancel, with: :conf do
+    r = Request.first(conf: conf)
+    unless (r.volunteer.nil?)
+      r.volunteer.requests.delete_if {|it| it.id == r.id}
+      r.volunteer.save!
+      r.volunteer = nil
+      r.save!
+      render('li', locals: {mes: '已经被主动取消'})
     end
   end
 

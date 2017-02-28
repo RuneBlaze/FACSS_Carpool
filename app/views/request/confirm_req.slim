@@ -1,0 +1,30 @@
+- if type == 'take'
+  h2 确认接受申请
+- else
+  h2 确认放弃申请
+table
+  thread
+    tr
+      th 性别
+      th 微信
+      th 日期
+      th 时间
+      th 地点
+  tbody
+    tr
+      td= r.gender
+      td= r.weixin
+      td= r.date
+      td= r.time
+      td= r.place
+
+- if type == 'take'
+  p 这是接单时期才会需要的文字
+  =form_for :volunteer, url_for(:volunteer, :take, :id => r.id), :id => 'take' do |f|
+    p
+      = f.submit "接单", :class => "button"
+- else
+  p 这是 forfiet 时期会给的提示文字
+  = form_for :volunteer, url_for(:volunteer, :forfeit, :id => r.id), :id => 'take' do |f|
+    p
+      = f.submit "放弃", :class => "button"
