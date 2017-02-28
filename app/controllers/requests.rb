@@ -126,7 +126,7 @@ UncCarpool::App.controllers :request do
       to vol.email
       content_type :html
       subject "FACSS Carpool 接受请求被主动取消"
-      render 'email/request_made', locals: {req: r, vol: vol}
+      render 'email/request_self_canceled', locals: {req: r, vol: vol}
     end
     r.destroy!
     render('li', locals: {mes: '已经被主动取消'})
