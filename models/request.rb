@@ -9,7 +9,7 @@ class Request
   property :gender, Enum[:male, :female, :other], :default => :male
   property :date, String, required: true
   property :time, String, required: true
-  property :passengers, Integer, required: true
+  property :passengers, Integer, required: true, max: 30
   property :place, String, :required => true, :default => "UNC Chapel Hill"
   property :phone, String, :required => true, format: /^(\([0-9]{3}\) |[0-9]{3})[0-9]{3}[0-9]{4}$/
   property :weixin, String

@@ -25,4 +25,4 @@ body
         == yield
     .footer
       hr
-      p== DEADLINE_END.strftime("当前活动日期：%Y年%m月%d日 %I:%M%p") + "<br>活动日期 #{DEADLINE_RANGE.to_i} 日前截止 Carpool 申请放弃" 
+      p== DEADLINE_END.strftime("当前活动日期：%Y年%m月%d日 %I:%M%p") + "<br>#{DEADLINE.strftime('%Y年%m月%d日 %I:%M%p')} 后不可改变接送人选。" 

@@ -1,0 +1,15 @@
+h1 密码重设
+= form_for :volunteer, '/volunteer/reset', :id => 'reset' do |f|
+  - if flash[:errors]
+    ul
+      - flash[:errors].each do |e|
+        li= e
+  - if flash[:success]
+    ul
+      - flash[:success].each do |s|
+        li= s
+  p
+    = f.label :email, :caption => "电子邮件"
+    = f.text_field :email
+  p
+    = f.submit "重设", :class => "button-primary"

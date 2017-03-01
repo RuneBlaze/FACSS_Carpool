@@ -16,7 +16,7 @@ UncCarpool::App.controllers :volunteer do
     render 'volunteer/login'
   end
 
-  before :except => [:login, :new, :create, :confirm] do
+  before :except => [:login, :new, :create, :confirm, :reset] do
     @user = Volunteer.first(id: session[:uid])
     if !@user
       return "403"
@@ -24,6 +24,44 @@ UncCarpool::App.controllers :volunteer do
 
     if !@user.confirmed?
       render('li', locals: {mes: 'volunteer not found'})
+    end
+  end
+
+  get :reset do
+    render 'volunteer/reset'
+  end
+
+  post :reset do
+    email = params[:volunteer][:email]
+    v = Volunteer.first(email: email)
+    unless v
+      render('li', locals: {mes: 'Email not found!'})
+    else
+      send_reset_email(v)
+      render('li', locals: {mes: 'Email sent!'})
+    end
+  end
+
+  get :repassword do
+    c = params[:code]
+    return "no such code" unless c
+    v = Volunteer.first(email_code: c)
+    unless v
+      render('li', locals: {mes: 'Code not found!'})
+    else
+      #session[:tmp_uid] = v.id
+      render 'volunteer/passreset', locals: {code: c}
+    end
+  end
+
+  post :passreset do
+    arg = params[:volunteer]
+    v = Volunteer.first(arg[:code])
+    if v.save
+      render('li', locals: {mes: 'Reset success!'})
+    else
+      flash[:errors] = v.errors.map(&:to_s)
+      render '/volunteer/repassword', locals: {code: c}
     end
   end
 
@@ -159,7 +197,7 @@ UncCarpool::App.controllers :volunteer do
 
   post :logout do
     session[:uid] = nil
-    render('li', locals: {mes: '登出成功！'})
+    redirect '/'
   end
 
   post :create do

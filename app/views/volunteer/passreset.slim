@@ -1,0 +1,22 @@
+- if flash[:errors]
+    h3 修改错误！
+    ul
+      - flash[:errors].flatten.each do |e|
+        li= e
+- if flash[:success]
+    h3 修改成功！
+    ul
+      - flash[:success].each do |s|
+        li= s
+= form_for :volunteer, '/volunteer/passreset', :id => 'passreset', :class => 'u-full-width' do |f|
+  h3 更改密码
+  .row2
+    p style="display: hidden;"
+      = f.label :code, :code => "旧密码"
+      = f.password_field :code, class: 'u-full-width', required: true, value: code
+    .six.columns
+      p
+        = f.label :password, :caption => "新密码（6 到 64 位任意字符）"
+        = f.password_field :password, class: 'u-full-width', min: 6, max: 64, required: true
+  p
+    = f.submit "修改密码", :class => "button"
