@@ -1,59 +1,48 @@
-.something
-  .somethinf
-    = form_for :volunteer, '/volunteer/create', :id => 'create', :class => 'u-full-width' do |f|
-      fieldset
-        - if flash[:errors]
-            h3 创建错误！
-            ul
-              - flash[:errors].each do |e|
-                li= e
-        h1 注册志愿者
-        h3 用户信息
-        .row2
-          .six.columns
-            p
-              = f.label :name, :caption => "真实姓名*"
-              = f.text_field :name, class: 'u-full-width', required: true
-          .six.columns
-            p
-              = f.label :email, :caption => "电子邮件 Email* （登录时用户名）"
-              = f.email_field :email, class: 'u-full-width', required: true
-        .row2
-          .six.columns
-            p
-              = f.label :password, :caption => "密码（6 到 64 位任意字符）*"
-              = f.password_field :password, class: 'u-full-width', min: 6, max: 64, required: true
-        h3 个人信息
-        p 以下信息之后都可以在个人页面进行更改。
-        .row2
-          .six.columns
-            p
-              = f.label :gender, :caption => "性别*"
-              = f.select(:gender, :options => [['男性', 'male'], ['女性', 'female']], class: 'u-full-width')
-          .six.columns
-            p
-              = f.label :grade, :caption => "年级*"
-              = f.select(:grade, :options => [['本科生', 'undergrad'], ['研究生', 'grad'], ['PHD', 'phd'], ['校友', 'alumni'], ['访问学者', 'visiting'], ['教职','prof']], class: 'u-full-width')
-        .row2
-          .six.columns
-            p
-              = f.label :phone, :caption => "电话号码 Phone* （XXXXXXXXXX）格式"
-              = f.phone_field :phone, class: 'u-full-width', required: true, pattern: '[\d]+'
-          .six.columns
-            p
-              = f.label :weixin, :caption => "微信"
-              = f.text_field :weixin, class: 'u-full-width'
-        .row2
-          .six.columns
-            p
-              = f.label :place, :caption => "地址"
-              = f.text_field :place, class: 'u-full-width'
-          .six.columns
-            p
-              = f.label :memo, :caption => '备注'
-              = f.text_area :memo, class: 'u-full-width'
-        p
-          = f.label :max_passengers, :caption => "最大接受人数 （整数）"
-          = f.number_field :max_passengers, class: 'u-full-widthx'
-        p
-          = f.submit "注册", :class => "button"
+= form_for :volunteer, '/volunteer/create', :id => 'create', :class => 'ui form' do |f|
+  - if flash[:errors]
+      h3 创建错误！
+      ul
+        - flash[:errors].each do |e|
+          li= e
+  h1 用户注册
+  .ui.dividing.header 用户信息
+  .field
+    = f.label :name, :caption => "真实姓名*"
+    = f.text_field :name, class: 'u-full-width', required: true
+  .field
+    = f.label :email, :caption => "电子邮件 Email* （登录时用户名）"
+    = f.email_field :email, class: 'u-full-width', required: true
+  .row2
+    .field
+        = f.label :password, :caption => "密码（6 到 64 位任意字符）*"
+        = f.password_field :password, class: 'u-full-width', min: 6, max: 64, required: true
+  .ui.dividing.header 个人信息
+  p 以下信息之后都可以在个人页面进行更改。
+  .row2
+    .field
+      = f.label :gender, :caption => "性别*"
+      = f.select(:gender, :options => [['男性', 'male'], ['女性', 'female']], class: 'u-full-width')
+    .field
+      = f.label :grade, :caption => "年级*"
+      = f.select(:grade, :options => [['本科生', 'undergrad'], ['研究生', 'grad'], ['PHD', 'phd'], ['校友', 'alumni'], ['访问学者', 'visiting'], ['教职','prof']], class: 'u-full-width')
+  .row2
+    .field
+      = f.label :phone, :caption => "电话号码 Phone* （XXXXXXXXXX）格式"
+      = f.phone_field :phone, class: 'u-full-width', required: true, pattern: '[\d]+'
+    .field
+      = f.label :weixin, :caption => "微信"
+      = f.text_field :weixin, class: 'u-full-width'
+  / .row2
+  /   .field
+  /     p
+  /       = f.label :place, :caption => "地址"
+  /       = f.text_field :place, class: 'u-full-width'
+  /   .field
+  /     p
+  /       = f.label :memo, :caption => '备注'
+  /       = f.text_area :memo, class: 'u-full-width'
+  / p
+  /   = f.label :max_passengers, :caption => "最大接受人数 （整数）"
+  /   = f.number_field :max_passengers, class: 'u-full-widthx'
+  p
+    = f.submit "注册", :class => "ui button"

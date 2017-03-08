@@ -5,21 +5,24 @@
 table
   thread
     tr
-      th 性别
+      th 人数
       th 微信
-      th 日期
-      th 时间
+      th 电话
+      th Email
+      / th 日期
       th 地点
   tbody
     tr
-      td= r.gender
+      td= r.passengers
       td= r.weixin
-      td= r.date
-      td= r.time
+      / td= r.date
+      / td= r.time
+      td= r.phone
+      td= r.email
       td= r.place
 
 - if type == 'take'
-  p 这是接单时期才会需要的文字
+  p 以上信息为你将接送的小伙伴信息，请确认。
   =form_for :volunteer, url_for(:volunteer, :take, :id => r.id), :id => 'take' do |f|
     p
       = f.submit "接单", :class => "button"

@@ -1,26 +1,27 @@
 h1 请求总览
 
-table
-  thread
+table.ui.celled.compact.definition.table
+  thead
     tr
-      / th 性别
-      th 微信
-      th 日期
-      th 时间
+      th 
       th 地点
       th 人数
-      th 接受请求
   tbody
-    - @reqs.select{|it| it.volunteer.nil? }.each do |r|
+    - @reqs.each do |r|
       tr
-        / td= r.gender
-        td= r.weixin
-        td= r.date
-        td= r.time
+        td
+          input type="checkbox"
         td= r.place
         td= r.passengers
-        td
-          - if @user.can_take_request?(r)
-            a href=url_for(:request,:action, id: r.id, type: "take") 接受
-          - else
-            span 超额
+        / td
+        /   - if @user.can_take_request?(r)
+        /     a href=url_for(:request,:action, id: r.id, type: "take") 接受
+        /   - else
+        /     span 超额
+    tfoot.full-width
+      tr
+        th
+        th colspan="4"
+          .ui.right.floated.small.primary.labeled.icon.button
+            i.user.icon
+            | 接受申请

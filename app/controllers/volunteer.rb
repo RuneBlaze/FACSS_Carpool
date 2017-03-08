@@ -103,6 +103,32 @@ UncCarpool::App.controllers :volunteer do
     end
   end
 
+  get :riderize do
+    render '/volunteer/riderize'
+  end
+
+  get :volunteerize do
+    render '/volunteer/volunteerize'
+  end
+
+  post :riderize do
+    vol = params[:volunteer]
+    vol[:group] = :rider
+    @user.update(vol)
+    @user.save
+
+    redirect '/volunteer/me'
+  end
+
+  post :volunteerize do
+    vol = params[:volunteer]
+    vol[:group] = :volunteer
+    @user.update(vol)
+    @user.save
+
+    redirect '/volunteer/me'
+  end
+
   post :take, :with => :id do
     r = Request.first(id: params[:id].to_i)
     if !r

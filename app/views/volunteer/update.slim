@@ -8,51 +8,51 @@
     ul
       - flash[:success].each do |s|
         li= s
-= form_for :volunteer, '/volunteer/update', :id => 'update', :class => 'u-full-width' do |f|
+= form_for :volunteer, '/volunteer/update', :id => 'update', :class => 'ui form' do |f|
   h1 更改信息
   h3 更改密码
   .row2
-    .six.columns
-      p
-        = f.label :password, :caption => "旧密码"
-        = f.password_field :old_password, class: 'u-full-width', required: true
-    .six.columns
-      p
-        = f.label :password, :caption => "新密码（6 到 64 位任意字符）"
-        = f.password_field :password, class: 'u-full-width', min: 6, max: 64, required: true
+    .field
+
+      = f.label :password, :caption => "旧密码"
+      = f.password_field :old_password, class: 'u-full-width', required: true
+    .field
+
+      = f.label :password, :caption => "新密码（6 到 64 位任意字符）"
+      = f.password_field :password, class: 'u-full-width', min: 6, max: 64, required: true
   p
-    = f.submit "修改密码", :class => "button"
-= form_for :volunteer, '/volunteer/update', :id => 'update', :class => 'u-full-width' do |f|
+    = f.submit "修改密码", :class => "ui button"
+= form_for :volunteer, '/volunteer/update', :id => 'update', :class => 'ui form' do |f|
   h3 修改信息
   .row22
-    .six.columns
-      p
-        = f.label :gender, :caption => "性别"
-        = f.select(:gender, :options => [['男性', 'male'], ['女性', 'female']], class: 'u-full-width', value: @user.gender)
-    .six.columns
-      p
-        = f.label :grade, :caption => "年级"
-        = f.select(:grade, :options => [['本科生', 'undergrad'], ['研究生', 'grad'], ['PHD', 'phd'], ['校友', 'alumni'], ['访问学者', 'visiting'], ['教职','prof']], class: 'u-full-width', value: @user.grade)
+    .field
+      
+      = f.label :gender, :caption => "性别"
+      = f.select(:gender, :options => [['男性', 'male'], ['女性', 'female']], class: 'u-full-width', value: @user.gender)
+    .field
+      
+      = f.label :grade, :caption => "年级"
+      = f.select(:grade, :options => [['本科生', 'undergrad'], ['研究生', 'grad'], ['PHD', 'phd'], ['校友', 'alumni'], ['访问学者', 'visiting'], ['教职','prof']], class: 'u-full-width', value: @user.grade)
   .row2
-    .six.columns
-      p
-        = f.label :phone, :caption => "电话号码 Phone"
-        = f.telephone_field :phone, class: 'u-full-width', pattern: '[\d-]+', value: @user.phone
-    .six.columns
-      p
-        = f.label :weixin, :caption => "微信"
-        = f.text_field :weixin, class: 'u-full-width', value: @user.weixin
+    .field
+      
+      = f.label :phone, :caption => "电话号码 Phone"
+      = f.telephone_field :phone, class: 'u-full-width', pattern: '[\d-]+', value: @user.phone
+    .field
+      
+      = f.label :weixin, :caption => "微信"
+      = f.text_field :weixin, class: 'u-full-width', value: @user.weixin
   .row2
-    .six.columns
-      p
-        = f.label :place, :caption => "地址"
-        = f.text_field :place, class: 'u-full-width', value: @user.place
-    .six.columns
-      p
-        = f.label :memo, :caption => '备注'
-        = f.text_area :memo, class: 'u-full-width', value: @user.memo
+    .field
+      
+      = f.label :place, :caption => "地址"
+      = f.text_field :place, class: 'u-full-width', value: @user.place
+    / .field
+    /   p
+    /     = f.label :memo, :caption => '备注'
+    /     = f.text_area :memo, class: 'u-full-width', value: @user.memo
+  / p
+  /   = f.label :max_passengers, caption: "最大乘客（整数）"
+  /   = f.number_field :max_passengers, value: @user.max_passengers
   p
-    = f.label :max_passengers, caption: "最大乘客（整数）"
-    = f.number_field :max_passengers, value: @user.max_passengers
-  p
-    = f.submit "修改信息", :class => "button"
+    = f.submit "修改信息", :class => "ui button"

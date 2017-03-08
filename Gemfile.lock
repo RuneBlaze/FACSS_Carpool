@@ -50,6 +50,8 @@ GEM
       data_objects (= 0.10.17)
     enumerable-lazy (0.0.2)
     eventmachine (1.2.3)
+    faker (1.7.3)
+      i18n (~> 0.5)
     fastercsv (1.5.5)
     i18n (0.8.0)
     json (1.8.6)
@@ -139,6 +141,7 @@ DEPENDENCIES
   dm-timestamps
   dm-types
   dm-validations
+  faker
   padrino (= 0.13.3.3)
   postmark
   rake

@@ -14,9 +14,8 @@ UncCarpool::App.controllers :request do
   end
 
 
-
   get :all do
-    @reqs = Request.all(confirmed: true)
+    @reqs = Volunteer.all(group: :rider)
     render 'request/all', layout: 'site'
   end
 

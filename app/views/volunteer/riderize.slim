@@ -1,0 +1,16 @@
+= form_for :volunteer, '/volunteer/riderize', :id => 'riderize', :class => 'ui form' do |f|
+  - if flash[:errors]
+      h3 创建错误！
+      ul
+        - flash[:errors].each do |e|
+          li= e
+  h1 我需要顺风车
+  .ui.dividing.header 顺风车信息
+  .field
+    = f.label :place, :caption => "出发地点*"
+    = f.text_area :place, class: 'u-full-width', required: true
+  .field
+    = f.label :email, :caption => "人数* "
+    = f.number_field :passengers, class: 'u-full-width', required: true
+  p
+    = f.submit "提交 CarPool 请求", :class => "ui button"

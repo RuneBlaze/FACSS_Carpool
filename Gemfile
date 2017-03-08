@@ -31,7 +31,7 @@ gem 'dm-constraints'
 gem 'dm-aggregates'
 gem 'dm-types'
 gem 'dm-core'
-
+gem 'faker'
 # Test requirements
 
 # Padrino Stable Gem

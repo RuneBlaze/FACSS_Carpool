@@ -17,7 +17,7 @@
   .row2
     .six.columns
       p
-        = f.label :gender, :caption => "Gender *"
+        = f.label :gender, :caption => "性别 *"
         = f.select(:gender, :options => [['男性', 'male'], ['女性', 'female']], class: 'u-full-width')
   .row2
     .six.columns
@@ -36,10 +36,9 @@
         = f.text_field :place, class: 'u-full-width', required: true
     .six.columns
       p
-        = f.label :passengers, :caption => "人数（整数）*"
+        = f.label :passengers, :caption => "需要被接送的人数（整数）*"
+        span style="font-size: 0.9em;" 因能力有限，请携带小孩的家庭自行前往。
         = f.number_field :passengers, class: 'u-full-width', required: true
-  .row2
-
 
   h3 联系方式
   .row2
