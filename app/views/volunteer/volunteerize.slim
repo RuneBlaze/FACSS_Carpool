@@ -5,12 +5,10 @@
         - flash[:errors].each do |e|
           li= e
   h1 我要成为志愿者
+  p 也许可以在这里写上鼓舞人心的话。
   .ui.dividing.header 志愿者信息填写
   .field
-    = f.label :place, :caption => "出发地点*"
-    = f.text_area :place, class: 'u-full-width', required: true
-  .field
-    = f.label :email, :caption => "人数* "
-    = f.number_field :passengers, class: 'u-full-width', required: true
+    = f.label :max_passengers, :caption => "最大承载人数* "
+    = f.number_field :max_passengers, class: 'u-full-width', required: true
   p
-    = f.submit "提交 CarPool 请求", :class => "ui button"
+    = f.submit "签订契约", :class => "ui button"

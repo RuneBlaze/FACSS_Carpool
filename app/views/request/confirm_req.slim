@@ -27,7 +27,7 @@ table
     p
       = f.submit "接单", :class => "button"
 - else
-  p 这是 forfiet 时期会给的提示文字
+  p 确认 Forfeit？
   = form_for :volunteer, url_for(:volunteer, :forfeit, :id => r.id), :id => 'take' do |f|
     p
-      = f.submit "放弃", :class => "button"
+      = f.submit "确认", :class => "ui button"

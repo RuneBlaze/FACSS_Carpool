@@ -1,25 +1,24 @@
-h1 2017 春季 BBQ
-p 4 月 1 日下午 1:30 - 5:00，于 Jordan Lake 举办。
+h1.ui.center.aligned.icon.header
+  i.circular.car.icon
+  span 2017 春季 BBQ
+center
+  p 4 月 1 日下午 1:30 - 5:00，Jordan Lake
+  .ui.buttons2
+    a.ui.button href=url_for(:volunteer, :new) 报名参加
+    button.ui.button 顺风车信息
+    button.ui.button 志愿者信息
+h2 Volunteer Accounts for Testing (Password: 111111)
+- Volunteer.all(group: :volunteer).each do |v|
+  p= v.email
+h2 Rider Accounts for Testing (Password: 111111)
+- Volunteer.all(group: :rider).each do |v|
+  p #{v.email}, #{v.weixin}
+.ui.dividing.header 信息1
 
+iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25909.556016786795!2d-79.03737539270729!3d35.73373112322205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ac956ef2464a35%3A0x90d4f9cc6b74f001!2sJordan+Lake+State+Recreation+Area-+Poplar+Point+Campground!5e0!3m2!1sen!2sus!4v1489085107247" width="600" height="450" frameborder="0" style="border:0" allowfullscreen
 
-h2 关于参加活动
+p 中国文明的发祥地是黄河流域，这本来来一个常识，可是随着日益增多的地下考古新发现，这一常识受到了越来越多的挑战。 
 
-p 如果要参加活动请注册，注册完毕之后如果有需要搭乘顺风车会给出选项填写。
+.ui.dividing.header 信息2
 
-p 如果是想要成为顺风车志愿者的，也麻烦先注册之后勾选成为志愿者。
-
-h2 活动详情
-
-p TODO
-
-/ table
-/   thread
-/     tr
-/       th 需分配请求
-/       th 总共请求
-/       th 志愿者总数
-/   tbody
-/     tr
-/       td= Request.all(volunteer: nil).size
-/       td= Request.all().size
-/       td= Volunteer.all.size
+p   最近，在辽河流域有了重大的突破－－据认为公元前六千年的红山文化遗址中，发现了非常成熟的龙的造型。面对这比之夏代还要古老的证据，人们猜测纷纷，认为辽河流域也是中国文明的发祥地之一，甚至是一个更重要的发祥地。此外，在青海、云南、贵州等地区，考古学家们也发现了大量的新石器时代的遗迹。仿佛与这些新发现的事实相呼应，有关“楚文化”研究的兴趣，也形成了一阵热潮。因为楚文化，仿佛是中原文化和南方文化的一种混和或中介，对它日益增长着的关注，暗示"中国文明起源于中原"这一观念已受到了强烈的动摇。 

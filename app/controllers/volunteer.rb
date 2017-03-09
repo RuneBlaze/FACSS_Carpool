@@ -1,6 +1,4 @@
 UncCarpool::App.controllers :volunteer do
-
-
   layout :site
 
   get :new do
@@ -117,6 +115,8 @@ UncCarpool::App.controllers :volunteer do
     @user.update(vol)
     @user.save
 
+    success '成功成为顺风车申请者！'
+
     redirect '/volunteer/me'
   end
 
@@ -129,62 +129,95 @@ UncCarpool::App.controllers :volunteer do
     redirect '/volunteer/me'
   end
 
-  post :take, :with => :id do
-    r = Request.first(id: params[:id].to_i)
-    if !r
-      return "404"
-    else
-      if r.volunteer
-        return "403 taken"
-      else
-        @user.requests << r
-        @user.save
-        r.volunteer = @user
-        r.save
+  post :discardgroup do
+    @user.group = :none
+    @user.save
+    success "成功取消当前特殊身份，现在是普通的活动参加者！"
+    redirect '/volunteer/me'
+  end
 
-        email do
-          @vol = r.volunteer
-          @req = r
-          from "facss_carpool_service@unc.edu"
-          to r.email
-          content_type :html
-          subject "FACSS Carpool Service 匹配成功"
-          render 'email/request_taken'
+  post :take do
+    p params
+    reqs = json_or_single params[:id]
+    p reqs
+    reqs.each do |id|
+      r = Volunteer.first(id: id)
+      if !r
+        return "404"
+      else
+        if r.parent
+          return "403 taken"
+        else
+          @user.cocar.new(source: @user, target: r)
+          @user.save
+          r.volunteer << @user
+          r.save
+
+          vol = @user
+
+          email do
+            @vol = vol
+            @req = r
+            from "facss_carpool_service@unc.edu"
+            to r.email
+            content_type :html
+            subject "FACSS Carpool Service 匹配成功"
+            render 'email/request_taken'
+          end
         end
-        render('li', locals: {mes: 'taken!'})
       end
     end
+    render('li', locals: {mes: 'taken!'})
+  end
+
+  post :notactive do
+    @user.active = false
+    @user.save
+
+    redirect '/volunteer/me'
+  end
+
+  post :enroll do
+    @user.active = true
+    @user.save
+
+    redirect '/volunteer/me'
   end
 
   post :forfeit, :with => :id do
+    require 'json'
     if after_deadline?
       return "403 after deadline"
     end
-    r = Request.first(id: params[:id].to_i)
-    if !r
-      return render('404', layout: 'site')
-    else
-      if r.volunteer.id == @user.id
-        @user.requests.delete_if {|it| it.id == r.id}
-        r.volunteer = nil
-        r.save!
-        @user.save!
-
-        email do
-          @vol = r.volunteer
-          @req = r
-          from "facss_carpool_service@unc.edu"
-          to r.email
-          content_type :html
-          subject "FACSS Carpool Service 志愿者取消匹配"
-          render 'email/request_forfeit'
-        end
-
-        render('li', locals: {mes: 'forfeit success!'})
+    reqs = json_or_single params[:id]
+    reqs.each do |id|
+      r = Volunteer.first(id: id)
+      if !r
+        return render('404', layout: 'site')
+      elsif !r.parent
+        return render('404', layout: 'site')
       else
-        return "403 you don't have that"
+        if r.parent.id == @user.id
+          @user.cocar.find{|it| it.target.id == r.id}.destroy()
+          r.volunteer = []
+          r.save!
+          @user.save!
+
+          email do
+            @vol = r.volunteer
+            @req = r
+            from "facss_carpool_service@unc.edu"
+            to r.email
+            content_type :html
+            subject "FACSS Carpool Service 志愿者取消匹配"
+            render 'email/request_forfeit'
+          end
+        else
+          return "403 you don't have that"
+        end
       end
     end
+    render('li', locals: {mes: 'forfeit success!'})
   end
 
   get :confirm do
@@ -241,7 +274,6 @@ UncCarpool::App.controllers :volunteer do
         render 'email/confirm', locals: {uri: uri, vol: u}
       end
       render('li', locals: {mes: '注册成功，请去邮箱激活邮件。'})
-      #redirect '/volunteer/me'
     else
       flash[:errors] = u.errors.map(&:to_s)
       redirect '/volunteer/new'

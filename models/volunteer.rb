@@ -1,3 +1,4 @@
+
 class Volunteer
   include DataMapper::Resource
 
@@ -33,6 +34,8 @@ class Volunteer
   property :email_code, String, :default => proc {SecureRandom.hex}, unique: true
   property :password_token, String, :default => proc {SecureRandom.hex}, unique: true
 
+  property :active, Boolean, default: true
+
   def confirmed?
     return self.confirmed
   end
@@ -42,8 +45,16 @@ class Volunteer
   end
 
   def passengers_count
-    return 0 if self.cocar.empty?
-    self.cocar.map{|it| it.target.passengers}.inject(:+)
+    return 0 if self.children.empty?
+    self.children.map{|it| it.passengers}.inject(:+)
+  end
+
+  def children
+    self.cocar.map{|it| it.target}.select{|it| it.parent && it.parent.id == self.id}
+  end
+
+  def parent
+    self.volunteer[0]
   end
 
   def rest_passengers
@@ -52,6 +63,10 @@ class Volunteer
 
   def can_take_request? rhs
     rhs.passengers <= rest_passengers
+  end
+
+  def reqs_json
+    self.cocar.map{|it| it.target}
   end
 end
 

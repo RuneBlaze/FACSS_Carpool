@@ -1,0 +1,37 @@
+h1 Overview
+table.ui.celled.table
+  thead
+    tr
+      th Total Users
+      th Total Active Users
+      th Total SimpleUsers
+      th Total Riders
+      th Total Volunteers
+  tbody
+    tr
+      td= Volunteer.all().size
+      td= Volunteer.all(active: true).size
+      td= Volunteer.all(group: :none, active: true).size
+      td= Volunteer.all(group: :rider, active: true).size
+      td= Volunteer.all(group: :volunteer, active: true).size
+
+h1 Roster
+p 灰色代表用户选择不参加这个活动
+table.ui.celled.table
+  thead
+    tr
+      th 姓名
+      th 性别
+      th 微信
+      th 邮箱
+      th 年级
+      th Group
+  tbody
+    - Volunteer.all().each do |v|
+      tr
+        td= v.name
+        td= v.gender
+        td= v.weixin
+        td= v.email
+        td= v.grade
+        td= v.group

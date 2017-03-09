@@ -13,16 +13,15 @@ UncCarpool::App.controllers :request do
     end
   end
 
-
   get :all do
-    @reqs = Volunteer.all(group: :rider)
-    render 'request/all', layout: 'site'
+    @reqs = Volunteer.all(group: :rider).select{|it| !it.parent}
+    all = JSON.dump(@reqs.map{|it| [it.id, it.passengers]}.to_h).html_safe
+    render 'request/all', layout: 'site', locals: {all: all}
   end
 
   get :edit do
     render 'request/edit_route', layout: 'site'
   end
-
 
   # FIXME:
   # this part looks particularly ugly
@@ -70,7 +69,7 @@ UncCarpool::App.controllers :request do
 
   get :action, with: [:id, :type] do
     c = params[:type]
-    r = Request.first(id: params[:id].to_i)
+    r = Volunteer.first(id: params[:id].to_i)
     if !r
       return "bye"
     end
@@ -83,7 +82,6 @@ UncCarpool::App.controllers :request do
     else
       return 'not found'
     end
-
   end
 
   get :conf do

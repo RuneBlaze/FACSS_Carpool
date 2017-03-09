@@ -1,6 +1,12 @@
 h1 请求总览
-
 table.ui.celled.compact.definition.table
+  p 当前人数：{{totalPassengers}} / {{maxPassengers}}
+  div style="display: none;"
+    | {{totalPassengers}} / {{maxPassengers}}
+    p
+      | {{selected}}
+    p
+      | {{all}}
   thead
     tr
       th 
@@ -8,20 +14,64 @@ table.ui.celled.compact.definition.table
       th 人数
   tbody
     - @reqs.each do |r|
-      tr
+      tr v-bind:class="{disabled: disabled(#{r.id}) }"
         td
-          input type="checkbox"
+          input type="checkbox" v-model="selected" :value="#{r.id}"
         td= r.place
         td= r.passengers
-        / td
-        /   - if @user.can_take_request?(r)
-        /     a href=url_for(:request,:action, id: r.id, type: "take") 接受
-        /   - else
-        /     span 超额
-    tfoot.full-width
-      tr
-        th
-        th colspan="4"
-          .ui.right.floated.small.primary.labeled.icon.button
-            i.user.icon
-            | 接受申请
+
+= form_for :volunteer, '/volunteer/take', :id => 'take' do |f|
+    tr
+      th
+      th colspan="4"
+        input name="id" v-model="selectedData" style="display: none;"
+        =f.submit "接受申请"
+script
+  | var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+        maxPassengers: #{@user.max_passengers},
+        currentPassengers: #{@user.passengers_count},
+        selected: [],
+        all: #{all}
+      },
+      
+      computed: {
+        addedPassengers: function() {
+          var loc = 0;
+          for(var i = 0; i < this.selected.length; i ++) { 
+            loc += this.all[this.selected[i]]
+          }
+          return loc;
+        },
+        
+        totalPassengers: function() {
+          return this.currentPassengers + this.addedPassengers;
+        },
+        
+        selectedData : function() {
+          return "[" + this.selected + "]";
+        }
+      },
+      
+      methods: {
+        disabled : function(id) {
+          if (this.selected.indexOf(id) > -1) return false;
+          var res = this.maxPassengers - this.totalPassengers;
+          var rest = this.all[id];
+          if (rest > res)
+            return true;
+          return false;
+        },
+        
+        selected : function(id) {
+          return this.selected.indexOf(id) > -1;
+        }
+        
+        
+      }
+    })
+== @all
+/ script
+/   | alert("hi")

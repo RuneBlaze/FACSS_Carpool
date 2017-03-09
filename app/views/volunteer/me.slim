@@ -1,17 +1,35 @@
 h1 Dashboard
 
 p 你好 #{@user.name}。
-
-.ui.buttons
-  a.ui.button href="/volunteer/riderize" 我需要顺风车
-  .or
-  a.ui.button href="/volunteer/volunteerize" 我想成为志愿者
+- if @user.group == :none
+  .ui.buttons
+    a.ui.button href="/volunteer/riderize" 我需要顺风车
+    .or
+    a.ui.button href="/volunteer/volunteerize" 我想成为志愿者
   
 .ui.dividing.header 当前状态
 - case @user.group
 - when :none
   p 当前已经登记加入这次活动。
 - when :rider
+  - if prt = @user.parent
+    .ui.positive.message 已经分配到了志愿者！
+    p 志愿者信息
+    table.ui.celled.table
+      thead
+        tr
+          th 姓名
+          th 性别
+          th 微信
+          th 邮箱
+          th 年级
+      tbody
+        tr
+          td= prt.name
+          td= prt.gender
+          td= prt.weixin
+          td= prt.email
+          td= prt.grade
   p 当前是需要顺风车的参加者。
   
   table.ui.celled.table
@@ -25,32 +43,53 @@ p 你好 #{@user.name}。
         td= @user.passengers
 - when :volunteer
   p 当前是顺风车的志愿者。
+  a.ui.positive.button href=url_for(:request, :all) 接受 CarPool 请求
+  h3 目前接受的 CarPool 申请
+  p 目前乘客数量：#{@user.passengers_count} / #{@user.max_passengers}
+  table.ui.celled.table
+    thead
+      tr
+        th 微信
+        th 日期
+        / th 时间
+        / th 地点
+        th 人数
+        th 放弃
+    tbody
+      - @user.children.each do |r|
+        tr
+          td= r.weixin
+          / td= r.date
+          / td= r.time
+          td= r.place
+          th= r.passengers
+          td
+            - if after_deadline?
+              p 不可放弃
+            - else
+              a href=url_for(:request, :action, id: r.id, type: "forfeit") 取消
+.ui.dividing.header 放弃身份
+- if @user.group != :none
+  p 放弃当前身份，成为普通的参加者。
+  =form_for :volunteer, url_for(:volunteer, :discardgroup), :id => 'discard' do |f|
+    p
+      = f.submit "成为普通参加者", :class => "ui button"
+- if @user.active
+  .ui.dividing.header 放弃参加这次活动
+  p 选择不参加这个活动，账号保留。可以再次登记为参加这个活动，但是清空自己已经接受的 CarPool 申请以及自己的 CarPool 申请。
 
-/ h3 目前接受的 CarPool 申请
-/ p 目前乘客数量：#{@user.passengers_count} / #{@user.max_passengers}
-/ table.u-full-width
-/   thread
-/     tr
-/       th 微信
-/       th 日期
-/       th 时间
-/       th 地点
-/       th 人数
-/       th 放弃
-/   tbody
-/     - @user.cocar.map{|it| it.target}.each do |r|
-/       tr
-/         td= r.weixin
-/         td= r.date
-/         td= r.time
-/         td= r.place
-/         th= r.passengers
-/         td
-/           - if after_deadline?
-/             p 不可放弃
-/           - else
-/             a href=url_for(:request, :action, id: r.id, type: "forfeit") 取消
-h3 其他选择
+  =form_for :volunteer, url_for(:volunteer, :notactive), :id => 'notactive', :class => 'ui form' do |f|
+      .field
+        = f.label :conf, :caption => "输入“确认”确认不参加"
+        = f.text_field :conf, class: 'u-full-width', required: true
+      = f.submit "放弃参加活动", :class => "ui negative button"
+- else
+  .ui.dividing.header 参加这次活动
+  p 将自己的状态改为“参加”。
+
+  =form_for :volunteer, url_for(:volunteer, :enroll), :id => 'enroll', :class => 'ui form' do |f|
+      = f.submit "参加活动", :class => "ui positive button"
+.ui.dividing.header 其他选择
 = form_for :request, '/volunteer/logout', :id => 'logout' do |f|
   p
     = f.submit "登出",:class => 'ui button'
