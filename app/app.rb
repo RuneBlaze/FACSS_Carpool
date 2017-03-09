@@ -70,7 +70,6 @@ module UncCarpool
       :authentication       => :plain,
       :enable_starttls_auto => true
     }
-    set :delivery_method, :test
 
     before do
       unless @user
