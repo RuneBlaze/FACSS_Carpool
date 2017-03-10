@@ -34,6 +34,11 @@ class Volunteer
   property :email_code, String, :default => proc {SecureRandom.hex}, unique: true
   property :password_token, String, :default => proc {SecureRandom.hex}, unique: true
 
+  property :ans1, String
+  property :ans2, String
+  property :ans3, String
+  property :ans4, String
+
   property :active, Boolean, default: true
 
   def confirmed?

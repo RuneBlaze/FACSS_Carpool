@@ -35,6 +35,17 @@
     .field
       = f.label :weixin, :caption => "微信"
       = f.text_field :weixin, class: 'u-full-width'
+  .ui.dividing.header 活动问题
+  .field
+    = f.label :ans1, :caption => "活动预计携带人数*"
+    = f.number_field :ans1, class: 'u-full-width', required: true
+  .field
+    = f.label :ans2, :caption => "关于 BBQ 的食材方面有什么建议吗？"
+    = f.text_field :ans2, class: 'u-full-width'
+  .field
+    = f.label :ans3, :caption => "对于 BBQ 活动内容有什么期望吗？"
+    = f.text_field :ans3, class: 'u-full-width'
+
   / .row2
   /   .field
   /     p

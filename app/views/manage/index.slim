@@ -26,6 +26,9 @@ table.ui.celled.table
       th 邮箱
       th 年级
       th Group
+      th ans1
+      th ans2
+      th ans3
   tbody
     - Volunteer.all().each do |v|
       tr
@@ -35,3 +38,6 @@ table.ui.celled.table
         td= v.email
         td= v.grade
         td= v.group
+        td= v.ans1
+        td= v.ans2
+        td= v.ans3

@@ -88,6 +88,30 @@ fieldset class='control-group#{error ? ' has-error' : ''}'
   div class='controls'
     = f.text_field :password_token, :class => 'form-control input-large input-with-feedback'
     span class='help-inline' = error ? f.error_message_on(:password_token, :class => 'text-error') : pat(:example)
+- error = @volunteer.errors.key?(:ans1) && @volunteer.errors[:ans1].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :ans1, :class => 'control-label'
+  div class='controls'
+    = f.text_field :ans1, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:ans1, :class => 'text-error') : pat(:example)
+- error = @volunteer.errors.key?(:ans2) && @volunteer.errors[:ans2].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :ans2, :class => 'control-label'
+  div class='controls'
+    = f.text_field :ans2, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:ans2, :class => 'text-error') : pat(:example)
+- error = @volunteer.errors.key?(:ans3) && @volunteer.errors[:ans3].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :ans3, :class => 'control-label'
+  div class='controls'
+    = f.text_field :ans3, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:ans3, :class => 'text-error') : pat(:example)
+- error = @volunteer.errors.key?(:ans4) && @volunteer.errors[:ans4].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :ans4, :class => 'control-label'
+  div class='controls'
+    = f.text_field :ans4, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:ans4, :class => 'text-error') : pat(:example)
 - error = @volunteer.errors.key?(:active) && @volunteer.errors[:active].count > 0
 fieldset class='control-group#{error ? ' has-error' : ''}'
   = f.label :active, :class => 'control-label'
