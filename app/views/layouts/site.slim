@@ -1,6 +1,6 @@
 doctype 5
 head
-  title UNC Carpool
+  title UNC FACSS Carpool
   meta charset='utf-8'
   link rel="stylesheet" href="/semantic.css"
   script src="/javascripts/vue.min.js"
@@ -8,7 +8,7 @@ head
 body
   .ui.fixed.inverted.main.menu
     .ui.container
-      a.item href="/" FACSS CarPool
+      a.item href="/" FACSS Carpool
       - unless @user
         a.item href="/volunteer/new" 参与者登记/注册
         a.item href="/volunteer/login" 登录
@@ -44,5 +44,6 @@ body
               - flash[:success].each do |e|
                 el= e
         == yield
-        .ui.divider
+        .ui style="margin-top: 3em;"
+        p align="center" style="color: #999;" facss_carpool_service@unc.edu，FACSS 活动 Carpool 系统测试版
       .ui.one.wide.column

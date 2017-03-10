@@ -2,7 +2,7 @@
   h2 确认接受申请
 - else
   h2 确认放弃申请
-table
+table.ui.ceiled.table
   thread
     tr
       th 人数
@@ -27,7 +27,7 @@ table
     p
       = f.submit "接单", :class => "button"
 - else
-  p 确认 Forfeit？
+  p 确认放弃吗？
   = form_for :volunteer, url_for(:volunteer, :forfeit, :id => r.id), :id => 'take' do |f|
     p
       = f.submit "确认", :class => "ui button"

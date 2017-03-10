@@ -34,12 +34,6 @@ fieldset class='control-group#{error ? ' has-error' : ''}'
   div class='controls'
     = f.text_field :grade, :class => 'form-control input-large input-with-feedback'
     span class='help-inline' = error ? f.error_message_on(:grade, :class => 'text-error') : pat(:example)
-- error = @volunteer.errors.key?(:school) && @volunteer.errors[:school].count > 0
-fieldset class='control-group#{error ? ' has-error' : ''}'
-  = f.label :school, :class => 'control-label'
-  div class='controls'
-    = f.text_field :school, :class => 'form-control input-large input-with-feedback'
-    span class='help-inline' = error ? f.error_message_on(:school, :class => 'text-error') : pat(:example)
 - error = @volunteer.errors.key?(:phone) && @volunteer.errors[:phone].count > 0
 fieldset class='control-group#{error ? ' has-error' : ''}'
   = f.label :phone, :class => 'control-label'
@@ -52,12 +46,30 @@ fieldset class='control-group#{error ? ' has-error' : ''}'
   div class='controls'
     = f.text_field :weixin, :class => 'form-control input-large input-with-feedback'
     span class='help-inline' = error ? f.error_message_on(:weixin, :class => 'text-error') : pat(:example)
+- error = @volunteer.errors.key?(:group) && @volunteer.errors[:group].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :group, :class => 'control-label'
+  div class='controls'
+    = f.text_field :group, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:group, :class => 'text-error') : pat(:example)
+- error = @volunteer.errors.key?(:max_passengers) && @volunteer.errors[:max_passengers].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :max_passengers, :class => 'control-label'
+  div class='controls'
+    = f.text_field :max_passengers, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:max_passengers, :class => 'text-error') : pat(:example)
 - error = @volunteer.errors.key?(:memo) && @volunteer.errors[:memo].count > 0
 fieldset class='control-group#{error ? ' has-error' : ''}'
   = f.label :memo, :class => 'control-label'
   div class='controls'
     = f.text_area :memo, :class => 'form-control input-large input-with-feedback'
     span class='help-inline' = error ? f.error_message_on(:memo, :class => 'text-error') : pat(:example)
+- error = @volunteer.errors.key?(:passengers) && @volunteer.errors[:passengers].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :passengers, :class => 'control-label'
+  div class='controls'
+    = f.text_field :passengers, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:passengers, :class => 'text-error') : pat(:example)
 - error = @volunteer.errors.key?(:confirmed) && @volunteer.errors[:confirmed].count > 0
 fieldset class='control-group#{error ? ' has-error' : ''}'
   = f.label :confirmed, :class => 'control-label'
@@ -76,6 +88,12 @@ fieldset class='control-group#{error ? ' has-error' : ''}'
   div class='controls'
     = f.text_field :password_token, :class => 'form-control input-large input-with-feedback'
     span class='help-inline' = error ? f.error_message_on(:password_token, :class => 'text-error') : pat(:example)
+- error = @volunteer.errors.key?(:active) && @volunteer.errors[:active].count > 0
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :active, :class => 'control-label'
+  div class='controls'
+    = f.check_box :active, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:active, :class => 'text-error') : pat(:example)
 
 div class="form-actions"
   = f.submit pat(:save), :class => 'btn btn-primary'

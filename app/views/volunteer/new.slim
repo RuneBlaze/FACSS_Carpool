@@ -4,17 +4,20 @@
       ul
         - flash[:errors].each do |e|
           li= e
-  h1 用户注册
+  h1 参与者注册
+  p 当前活动：2017 春季 BBQ
+  .ui.message
+    | 在这里注册成为参与者之后，会有进一步的界面提供给需要拼车的人。志愿者也需要先登记为参与者。
   .ui.dividing.header 用户信息
   .field
     = f.label :name, :caption => "真实姓名*"
     = f.text_field :name, class: 'u-full-width', required: true
   .field
-    = f.label :email, :caption => "电子邮件 Email* （登录时用户名）"
+    = f.label :email, :caption => "电子邮件 Email* （登录时用户名）（会被验证）"
     = f.email_field :email, class: 'u-full-width', required: true
   .row2
     .field
-        = f.label :password, :caption => "密码（6 到 64 位任意字符）*"
+        = f.label :password, :caption => "密码（6 到 64 位任意字符）（在这个网站修改信息，更改状态，请求拼车用）*"
         = f.password_field :password, class: 'u-full-width', min: 6, max: 64, required: true
   .ui.dividing.header 个人信息
   p 以下信息之后都可以在个人页面进行更改。
@@ -44,5 +47,7 @@
   / p
   /   = f.label :max_passengers, :caption => "最大接受人数 （整数）"
   /   = f.number_field :max_passengers, class: 'u-full-widthx'
+  
   p
     = f.submit "注册", :class => "ui button"
+  p 注册之后我们会以 facss_carpool_service@unc.edu 邮箱发送激活邮件确保邮箱正确。

@@ -167,7 +167,7 @@ UncCarpool::App.controllers :volunteer do
         end
       end
     end
-    render('li', locals: {mes: 'taken!'})
+    render('li', locals: {mes: '成功选择！前往个人 Dashboard 可以查看管理选择好的请求！'})
   end
 
   post :notactive do
@@ -217,7 +217,7 @@ UncCarpool::App.controllers :volunteer do
         end
       end
     end
-    render('li', locals: {mes: 'forfeit success!'})
+    render('li', locals: {mes: '成功放弃请求，对方会接受邮件提醒。'})
   end
 
   get :confirm do
@@ -270,10 +270,10 @@ UncCarpool::App.controllers :volunteer do
         from "facss_carpool_service@unc.edu"
         to u.email
         content_type :html
-        subject "FACSS Carpool Service 志愿者邮箱激活"
+        subject "FACSS 活动邮箱确认"
         render 'email/confirm', locals: {uri: uri, vol: u}
       end
-      render('li', locals: {mes: '注册成功，请去邮箱激活邮件。'})
+      render('li', locals: {mes: '成功登记，为了保证邮箱正确请去注册邮箱点开“邮箱确认”邮件。'})
     else
       flash[:errors] = u.errors.map(&:to_s)
       redirect '/volunteer/new'

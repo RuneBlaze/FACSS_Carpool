@@ -4,14 +4,16 @@
       ul
         - flash[:errors].each do |e|
           li= e
-  h1 我需要顺风车
-  p 注意事项之类的
-  .ui.dividing.header 顺风车信息
+  h1 我需要拼车
+  p 请在下方填写拼车有关的信息。
+  .ui.brown.message
+    | 因能力有限，请携带小孩的家庭自行前往。
+  .ui.dividing.header 拼车信息
   .field
-    = f.label :place, :caption => "出发地点*"
+    = f.label :place, :caption => "出发地点（地址）（也可以备注上特殊注意事项）*"
     = f.text_area :place, class: 'u-full-width', required: true
   .field
-    = f.label :email, :caption => "人数* "
+    = f.label :email, :caption => "总共需要拼车人数* "
     = f.number_field :passengers, class: 'u-full-width', required: true
   p
-    = f.submit "提交 CarPool 请求", :class => "ui button"
+    = f.submit "提交 Carpool 请求", :class => "ui button"

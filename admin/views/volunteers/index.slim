@@ -32,13 +32,16 @@ div class="tabs-content"
         th class='header' = mat(:volunteer, :gender)
         th class='header' = mat(:volunteer, :place)
         th class='header' = mat(:volunteer, :grade)
-        th class='header' = mat(:volunteer, :school)
         th class='header' = mat(:volunteer, :phone)
         th class='header' = mat(:volunteer, :weixin)
+        th class='header' = mat(:volunteer, :group)
+        th class='header' = mat(:volunteer, :max_passengers)
         th class='header' = mat(:volunteer, :memo)
+        th class='header' = mat(:volunteer, :passengers)
         th class='header' = mat(:volunteer, :confirmed)
         th class='header' = mat(:volunteer, :email_code)
         th class='header' = mat(:volunteer, :password_token)
+        th class='header' = mat(:volunteer, :active)
         th class='header list-row-action-header'
 
     tbody
@@ -52,13 +55,16 @@ div class="tabs-content"
           td class='list-column' = volunteer.gender
           td class='list-column' = volunteer.place
           td class='list-column' = volunteer.grade
-          td class='list-column' = volunteer.school
           td class='list-column' = volunteer.phone
           td class='list-column' = volunteer.weixin
+          td class='list-column' = volunteer.group
+          td class='list-column' = volunteer.max_passengers
           td class='list-column' = volunteer.memo
+          td class='list-column' = volunteer.passengers
           td class='list-column' = volunteer.confirmed ? tag_icon(:ok) : tag_icon(:remove)
           td class='list-column' = volunteer.email_code
           td class='list-column' = volunteer.password_token
+          td class='list-column' = volunteer.active ? tag_icon(:ok) : tag_icon(:remove)
           td class='list-column list-row-action'
             div class='list-row-action-wrapper'
               = link_to tag_icon(:edit), :href => url(:volunteers, :edit, :id => volunteer.id), :rel => :tooltip, :title => "#{pat(:edit)} volunteer", :class => 'list-row-action-wrapper-link'

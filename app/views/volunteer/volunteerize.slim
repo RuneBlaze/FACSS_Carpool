@@ -5,10 +5,10 @@
         - flash[:errors].each do |e|
           li= e
   h1 我要成为志愿者
-  p 也许可以在这里写上鼓舞人心的话。
+  p 感谢成为志愿者，成为志愿者之后可以接受其他人提出来的拼车请求。
   .ui.dividing.header 志愿者信息填写
   .field
-    = f.label :max_passengers, :caption => "最大承载人数* "
+    = f.label :max_passengers, :caption => "能承载拼车人数（整数）* "
     = f.number_field :max_passengers, class: 'u-full-width', required: true
   p
-    = f.submit "签订契约", :class => "ui button"
+    = f.submit "成为志愿者", :class => "ui button"
