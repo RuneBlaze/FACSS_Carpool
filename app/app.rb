@@ -1,3 +1,4 @@
+2
 module UncCarpool
   class App < Padrino::Application
     use IdentityMap
@@ -72,7 +73,6 @@ module UncCarpool
     }
 
     before do
-      return "系统出现数据库失误，正在修复，敬请期待，带来的不便在此抱歉。"
       unless @user
         if session[:uid]
           @user = Volunteer.first(id: session[:uid])
