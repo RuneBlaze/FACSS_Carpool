@@ -31,7 +31,7 @@ table.ui.celled.table
       th ans3
   tbody
     - Volunteer.all().each do |v|
-      tr
+      tr class=(v.active ? "nop" : "disabled")
         td= v.name
         td= v.gender
         td= v.weixin
