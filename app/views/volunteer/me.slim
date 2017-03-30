@@ -54,9 +54,12 @@ p 你好 #{@user.name}。
     thead
       tr
         th 微信
-        th 日期
+        / th 日期
+        th 电话
+        th 邮箱
+        th 微信
         / th 时间
-        / th 地点
+        th 地点
         th 人数
         th 放弃
     tbody
@@ -65,6 +68,9 @@ p 你好 #{@user.name}。
           td= r.weixin
           / td= r.date
           / td= r.time
+          td= r.phone
+          td= r.email
+          td= r.weixin
           td= r.place
           th= r.passengers
           td

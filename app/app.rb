@@ -84,5 +84,9 @@ module UncCarpool
     get '/' do
       render 'index', layout: 'site'
     end
+
+    get '/about' do
+      render 'about', layout: 'site'
+    end
   end
 end
