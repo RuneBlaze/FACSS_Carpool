@@ -72,7 +72,7 @@ module UncCarpool
       :enable_starttls_auto => true
     }
 
-    before except: ['/construction'] do
+    before except: ['/construction', '/about'] do
       redirect '/construction'
       unless @user
         if session[:uid]
