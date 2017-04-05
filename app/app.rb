@@ -72,7 +72,8 @@ module UncCarpool
       :enable_starttls_auto => true
     }
 
-    before do
+    before except: ['/construction'] do
+      redirect '/construction'
       unless @user
         if session[:uid]
           @user = Volunteer.first(id: session[:uid])
@@ -87,6 +88,10 @@ module UncCarpool
 
     get '/about' do
       render 'about', layout: 'site'
+    end
+
+    get '/construction' do
+      render 'construction', layout: 'site'
     end
   end
 end

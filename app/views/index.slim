@@ -5,14 +5,7 @@ center
   p 4 月 1 日下午 2:00 - 5:00，Jordan Lake
   .ui.buttons2
     a.ui.button href=url_for(:volunteer, :new) 报名参加
-    / button.ui.button 拼车信息
-    / button.ui.button 志愿者信息
-/ h2 Volunteer Accounts for Testing (Password: 111111)
-/ - Volunteer.all(group: :volunteer).each do |v|
-/   p= v.email
-/ h2 Rider Accounts for Testing (Password: 111111)
-/ - Volunteer.all(group: :rider).each do |v|
-/   p #{v.email}, #{v.weixin}
+
 .ui.message
   p 之前 Database Error 导致网页在春假期间暂时无法访问，并且春假期间的注册信息丢失，带来的不便表示抱歉
 .ui.dividing.header 活动概况
