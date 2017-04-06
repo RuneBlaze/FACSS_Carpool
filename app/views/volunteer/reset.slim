@@ -8,8 +8,9 @@ h1 密码重设
     ul
       - flash[:success].each do |s|
         li= s
-  p
-    = f.label :email, :caption => "电子邮件"
-    = f.text_field :email
-  p
-    = f.submit "重设", :class => "button-primary"
+  .ui.form
+    .field
+      = f.label :email, :caption => "电子邮件"
+      = f.text_field :email
+    .field
+      = f.submit "重设", :class => "ui button"
