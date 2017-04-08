@@ -6,20 +6,6 @@ UncCarpool::App.controllers :manage do
     render 'manage/index'
   end
 
-=begin
-td= v.name
-td= v.gender
-td= v.weixin
-td= v.phone
-td= v.email
-td= v.grade
-td=(v.parent ? v.parent.name : "None")
-td= v.group
-td= v.ans1
-td= v.ans2
-td= v.ans3
-=end
-
   get :roster_csv do
     res = CSV.generate do |csv|
       csv << ["Name", "Gender", "Weixin", "Phone", "Email", "Grade", "Volunteer", "Group", "Ans1", "Ans2", "Ans3"]

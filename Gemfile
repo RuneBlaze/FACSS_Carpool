@@ -32,12 +32,9 @@ gem 'dm-aggregates'
 gem 'dm-types'
 gem 'dm-core'
 gem 'faker'
-# Test requirements
-
-# Padrino Stable Gem
 gem 'padrino', '0.13.3.3'
-
 gem 'postmark'
+gem "graphql"
 
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'

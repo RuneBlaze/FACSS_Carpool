@@ -5,10 +5,18 @@ head
   link rel="stylesheet" href="/semantic.css"
   script src="/javascripts/vue.min.js"
   meta name='viewport' content='width=device-width, initial-scale=1'
+style
+  |
+    .ui.footer.segment {
+      margin: 5em 0em 0em;
+      padding: 5em 0em;
+    }
+    
+
 body
-  .ui.fixed.inverted.main.menu
+  .ui.fixed.inverted.teal.main.menu
     .ui.container
-      a.item href="/" FACSS Carpool
+      a.item.header href="/" FACSS Carpool
       - unless @user
         a.item href="/volunteer/new" 参与者登记/注册
         a.item href="/volunteer/login" 登录
@@ -46,6 +54,10 @@ body
               - flash[:success].each do |e|
                 el= e
         == yield
-        .ui style="margin-top: 3em;"
-        p align="center" style="color: #999;" facss_carpool_service@unc.edu，FACSS 活动 Carpool 系统测试版
       .ui.one.wide.column
+  .ui.inverted.vertical.teal.segment.footer
+    .ui.left.aligned.container
+      .ui.stackable.inverted.divided.grid
+        .six.wide.column
+          .ui.inverted.header About
+          p facss_carpool_service@unc.edu <br>FACSS 活动 Carpool 系统测试版

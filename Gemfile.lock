@@ -53,6 +53,7 @@ GEM
     faker (1.7.3)
       i18n (~> 0.5)
     fastercsv (1.5.5)
+    graphql (1.5.5)
     i18n (0.8.0)
     json (1.8.6)
     mail (2.6.4)
@@ -142,6 +143,7 @@ DEPENDENCIES
   dm-types
   dm-validations
   faker
+  graphql
   padrino (= 0.13.3.3)
   postmark
   rake
