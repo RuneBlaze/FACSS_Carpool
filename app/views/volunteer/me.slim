@@ -33,7 +33,6 @@ p 你好 #{@user.name}。
           td= prt.email
           td= prt.grade
   p 当前是需要拼车的参加者，登记信息如下。
-
   
   table.ui.celled.table
     thead
@@ -54,11 +53,9 @@ p 你好 #{@user.name}。
     thead
       tr
         th 微信
-        / th 日期
         th 电话
         th 邮箱
         th 微信
-        / th 时间
         th 地点
         th 人数
         th 放弃
@@ -96,7 +93,6 @@ p 你好 #{@user.name}。
 - else
   .ui.dividing.header 参加这次活动
   p 将自己的状态改为“参加”。
-
   =form_for :volunteer, url_for(:volunteer, :enroll), :id => 'enroll', :class => 'ui form' do |f|
       = f.submit "参加活动", :class => "ui positive button"
 .ui.dividing.header 其他选择

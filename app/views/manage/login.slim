@@ -1,0 +1,10 @@
+h1 Admin Account Login
+
+= form_for :account, '/manage/login', :id => 'manage', :class => 'ui form' do |f|
+  .field
+    = f.label :email, :caption => "Email"
+    = f.text_field :email
+  .field
+    = f.label :password, :caption => "密码（Password）"
+    = f.password_field :password
+  = f.submit "登录", :class => "ui teal button"

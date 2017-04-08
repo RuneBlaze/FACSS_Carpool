@@ -2,9 +2,30 @@ require 'csv'
 UncCarpool::App.controllers :manage do
   layout :site
 
+  before except: [:login] do
+    unless session[:admin]
+      redirect '/manage/login'
+    end
+  end
+
   get :index do
     render 'manage/index'
   end
+
+  get :login do
+    render 'manage/login'
+  end
+
+  post :login do
+    v = Account.authenticate(params[:account][:email], params[:account][:password])
+    if v
+      session[:admin] = v
+      redirect '/manage'
+    else
+      return 'Login Failed'
+    end
+  end
+  
 
   get :roster_csv do
     res = CSV.generate do |csv|
