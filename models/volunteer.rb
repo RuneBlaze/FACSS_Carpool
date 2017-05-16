@@ -80,3 +80,24 @@ class Cocar
   belongs_to :source, 'Volunteer', key: true
   belongs_to :target, 'Volunteer', key: true
 end
+
+UserType = GraphQL::ObjectType.define do
+  name "User"
+  description "The User"
+
+  field :id, !types.ID
+end
+
+QueryType = GraphQL::ObjectType.define do
+  name "Query"
+
+  field :user do
+    type UserType
+    argument :id, !types.ID
+    resolve ->(obj, args, ctx) { Post.find(args['id']) }
+  end
+end
+
+Schema = GraphQL::Schema.define do
+  query QueryType
+end

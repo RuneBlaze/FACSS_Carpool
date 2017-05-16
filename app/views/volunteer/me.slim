@@ -1,4 +1,4 @@
-h1 Dashboaord - 参与者仪表盘
+h1 仪表盘
 
 p 你好 #{@user.name}。
 - if @user.group == :none
@@ -6,6 +6,7 @@ p 你好 #{@user.name}。
     a.ui.button href="/volunteer/riderize" 我需要申请拼车配对
     .or
     a.ui.button href="/volunteer/volunteerize" 我是拼车志愿者
+.ui.dividing.header 我自己
   
 .ui.dividing.header 当前状态
 - case @user.group

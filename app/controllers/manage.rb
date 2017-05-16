@@ -25,7 +25,6 @@ UncCarpool::App.controllers :manage do
       return 'Login Failed'
     end
   end
-  
 
   get :roster_csv do
     res = CSV.generate do |csv|
