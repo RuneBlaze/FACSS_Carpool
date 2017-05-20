@@ -1,0 +1,20 @@
+h1 手动分配
+p 在这里会列出所有志愿者，每个志愿者会列出信息。
+- @all.each do |v|
+    h2= v.name
+    p 当前已经分配到的乘客 #{v.children.size} / #{v.max_passengers}
+    ul
+        - v.children.each do |c|
+            li
+                span= c.name
+                span= " "
+                = form_for :volunteer, url_for(:manage, :forfeit, lhs: v.id, rhs: c.id), :id => 'connect' do |f|
+                    = f.submit "放弃", :class => "button"
+    p 时间点上适合的乘客
+    ul
+        - @all.select{|it| it.inclined_taking?(v) && !it.parent}.each do |c|
+            li
+                span= c.name
+                span= " "
+                = form_for :volunteer, url_for(:manage, :connec, lhs: v.id, rhs: c.id), :id => 'forfeit' do |f|
+                    = f.submit "手动匹配", :class => "button"

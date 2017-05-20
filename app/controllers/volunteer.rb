@@ -137,9 +137,7 @@ UncCarpool::App.controllers :volunteer do
   end
 
   post :take do
-    p params
     reqs = json_or_single params[:id]
-    p reqs
     reqs.each do |id|
       r = Volunteer.first(id: id)
       if !r
@@ -152,9 +150,7 @@ UncCarpool::App.controllers :volunteer do
           @user.save
           r.volunteer << @user
           r.save
-
           vol = @user
-
           email do
             @vol = vol
             @req = r

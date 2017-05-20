@@ -1,19 +1,37 @@
 h1 仪表盘
 
-p 你好 #{@user.name}。
+
 - if @user.group == :none
+  h3 你是拼车志愿者，还是需要拼车的新生？
+  p 你好 #{@user.name}，你已经成功注册，但请麻烦继续完善信息才能让系统帮忙拼车。
   .ui.buttons
-    a.ui.button href="/volunteer/riderize" 我需要申请拼车配对
-    .or
-    a.ui.button href="/volunteer/volunteerize" 我是拼车志愿者
+    / a.ui.button  我需要申请拼车配对
+    / .or
+    / a.ui.button  我是拼车志愿者
+  .ui.grid
+    .eight.wide.column
+      .ui.card
+        .content
+          .header 我是新生
+        .content
+          .ui.sub.header 我是即将进入 UNC 的新生。我需要志愿者接机。
+        .extra.content
+          a.ui.teal.button href="/volunteer/riderize" 对，我是新生，去填写信息
+    .eight.wide.column
+      .ui.card
+        .content
+          .header 我是志愿者
+        .content
+          .ui.sub.header 我愿意在一些特定的时间段帮助接机。
+        .extra.content
+          a.ui.teal.button href="/volunteer/volunteerize" 我是志愿者，去填写信息
 .ui.dividing.header 我自己
   
 .ui.dividing.header 当前状态
 - case @user.group
 - when :none
-  p 当前已经登记加入这次春季 BBQ 活动。
-  p 如果不需要这里给拼车配对，或者不是这次活动志愿者的话就 All Set 了，
-    如果有特殊信息我们会往注册邮箱发送电子邮件的。
+  p 当前账号已经表示要“参加春季新生接机”活动，但是身份是志愿者还是需要接机的学生没有指明，需要指明。
+  p 请选择上方两个按钮中的一个，登记成为“新生”或者“志愿者”来完善个人信息。
 - when :rider
   - if prt = @user.parent
     .ui.positive.message 已经分配到了志愿者！
@@ -82,6 +100,11 @@ p 你好 #{@user.name}。
   =form_for :volunteer, url_for(:volunteer, :discardgroup), :id => 'discard' do |f|
     p
       = f.submit "成为普通参加者", :class => "ui button"
+= form_for :request, '/volunteer/logout', :id => 'logout' do |f|
+  p
+    = f.submit "登出账号",:class => 'ui button'
+
+
 - if @user.active
   .ui.dividing.header 放弃参加这次活动
   p 这里可以选择不参加这个活动，账号保留。可以再次登记为参加这个活动，但是清空自己已经接受的 Carpool 申请以及自己的 CarPool 申请。
@@ -96,7 +119,3 @@ p 你好 #{@user.name}。
   p 将自己的状态改为“参加”。
   =form_for :volunteer, url_for(:volunteer, :enroll), :id => 'enroll', :class => 'ui form' do |f|
       = f.submit "参加活动", :class => "ui positive button"
-.ui.dividing.header 其他选择
-= form_for :request, '/volunteer/logout', :id => 'logout' do |f|
-  p
-    = f.submit "登出账号",:class => 'ui button'

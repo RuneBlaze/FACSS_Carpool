@@ -1,5 +1,4 @@
 UncCarpool::App.controllers :request do
-
   layout :site
 
   get :new do
@@ -59,7 +58,7 @@ UncCarpool::App.controllers :request do
       if r.confirmed?
         return "email already confirmed"
       end
-
+      
       r.confirmed = true
       r.save
 

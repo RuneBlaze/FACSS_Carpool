@@ -6,6 +6,10 @@ module UncCarpool
       # def simple_helper_method
       # ...
       # end
+
+      def lift_user v
+        return Volunteer.first(id: v)
+      end
     end
 
     helpers ApiHelper

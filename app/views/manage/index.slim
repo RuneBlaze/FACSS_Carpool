@@ -1,47 +1,51 @@
-h1 Overview
-table.ui.celled.table
-  thead
-    tr
-      th Total Users
-      th Total Active Users
-      th Total SimpleUsers
-      th Total Riders
-      th Total Volunteers
-  tbody
-    tr
-      td= Volunteer.all().size
-      td= Volunteer.all(active: true).size
-      td= Volunteer.all(group: :none, active: true).size
-      td= Volunteer.all(group: :rider, active: true).size
-      td= Volunteer.all(group: :volunteer, active: true).size
+h1 后台
+a.ui.basic.button href="/manage/roster_csv" 花名册
+a.ui.basic.button href="/manage/email-all" 获取邮件列表
+a.ui.basic.button href="/manage/connect" 手动分配 / 取消分配
 
-h1 Roster
-p 深色标记代表用户没有分配到志愿者，但是需要拼车
-table.ui.celled.table
-  thead
-    tr
-      th 姓名
-      th 性别
-      th 微信
-      th 电话
-      th 邮箱
-      th 年级
-      th 志愿者
-      th Group
-      th ans1
-      th ans2
-      th ans3
-  tbody
-    - Volunteer.all().each do |v|
-      tr class=((v.group == :rider && !v.parent) ? "active" : "nop")
-        td= v.name
-        td= v.gender
-        td= v.weixin
-        td= v.phone
-        td= v.email
-        td= v.grade
-        td=(v.parent ? v.parent.name : "None")
-        td= v.group
-        td= v.ans1
-        td= v.ans2
-        td= v.ans3
+/ table.ui.celled.table
+/   thead
+/     tr
+/       th Total Users
+/       th Total Active Users
+/       th Total SimpleUsers
+/       th Total Riders
+/       th Total Volunteers
+/   tbody
+/     tr
+/       td= Volunteer.all().size
+/       td= Volunteer.all(active: true).size
+/       td= Volunteer.all(group: :none, active: true).size
+/       td= Volunteer.all(group: :rider, active: true).size
+/       td= Volunteer.all(group: :volunteer, active: true).size
+
+/ h1 Roster
+/ p 深色标记代表用户没有分配到志愿者，但是需要拼车
+/ table.ui.celled.table
+/   thead
+/     tr
+/       th 姓名
+/       th 性别
+/       th 微信
+/       th 电话
+/       th 邮箱
+/       th 年级
+/       th 志愿者
+/       th Group
+/       th ans1
+/       th ans2
+/       th ans3
+/   tbody
+/     - Volunteer.all().each do |v|
+/       tr class=((v.group == :rider && !v.parent) ? "active" : "nop")
+/         td= v.name
+/         td= v.gender
+/         td= v.weixin
+/         td= v.phone
+/         td= v.email
+/         td= v.grade
+/         td=(v.parent ? v.parent.name : "None")
+/         td= v.group
+/         td= v.ans1
+/         td= v.ans2
+/         td= v.ans3

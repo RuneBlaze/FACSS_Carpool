@@ -14,7 +14,7 @@ class Volunteer
   property :grade, Enum[:undergrad, :grad, :phd, :prof, :alumni, :visiting], default: :undergrad
 
   # property :school, String, :unique => true
-  property :phone, String, :required => true, format: /^(\([0-9]{3}\) |[0-9]{3})[0-9]{3}[0-9]{4}$/
+  property :phone, String, :required => true, format: /^(\([0-9]{3}\) |[0-9]{3})[0-9]{3}[0-9]{4,5}$/
   property :weixin, String
 
   # Auxilary Properties
@@ -71,6 +71,49 @@ class Volunteer
 
   def reqs_json
     self.cocar.map{|it| it.target}
+  end
+
+  alias raw_max_passengers max_passengers
+  def max_passengers
+    self.raw_max_passengers || 1
+  end
+
+  def bitfield
+    return ans4.to_i
+  end
+
+  def inclined_taking? v
+    v.bitfield & self.bitfield > 0
+  end
+
+  def take_as_rider! rhs 
+    if rhs.parent
+      return [:failed, ""]
+    else
+      self.cocar.new(source: self, target: r)
+      self.save
+      rhs.volunteer << self
+      rhs.save
+      return [:ok, self]
+    end
+  end
+
+  def delete_rider! r
+    if !r
+      return nil
+    elsif !r.parent
+      return [:failed, ""]
+    else
+      if r.parent.id == self.id
+        self.cocar.find{|it| it.target.id == r.id}.destroy()
+        r.volunteer = []
+        r.save!
+        self.save!
+        return [:ok, self]
+      else
+        return [:failed, "permission denied"]
+      end
+    end
   end
 end
 

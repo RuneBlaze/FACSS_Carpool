@@ -12,6 +12,11 @@ UncCarpool::App.controllers :manage do
     render 'manage/index'
   end
 
+  get :connect do
+    @all = Volunteer.all()
+    render 'manage/connect'
+  end
+
   get :login do
     render 'manage/login'
   end
@@ -23,6 +28,33 @@ UncCarpool::App.controllers :manage do
       redirect '/manage'
     else
       return 'Login Failed'
+    end
+  end
+
+  post :connect, with: [:lhs, :rhs] do
+    lhs = params[:lhs]
+    rhs = params[:rhs]
+    vol = lift_user lhs
+    rid = lift_user rhs
+    if !(vol && rid)
+      return 'not found'
+    else
+      vol.take_as_rider! rid
+      return 'success'
+    end
+  end
+  
+
+  post :forfeit, with: [:lhs, :rhs] do
+    lhs = params[:lhs]
+    rhs = params[:rhs]
+    vol = lift_user lhs
+    rid = lift_user rhs
+    if !(vol && rid)
+      return 'not found'
+    else
+      vol.delete_rider! rid
+      return 'success'
     end
   end
 
