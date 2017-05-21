@@ -58,13 +58,17 @@ UncCarpool::App.controllers :manage do
     end
   end
 
+  post :batch_email, with: [:group] do
+    g = params[:group]
+  end
+
   get :roster_csv do
     res = CSV.generate do |csv|
-      csv << ["Name", "Gender", "Weixin", "Phone", "Email", "Grade", "Volunteer", "Group", "Ans1", "Ans2", "Ans3"]
+      csv << ["Name", "Gender", "Weixin", "Phone", "Email", "Grade", "Volunteer", "Group", "Ans1", "Ans2", "Ans3", "时间段"]
       Volunteer.all().each do |v|
         csv << [v.name, v.gender, v.weixin, v.phone, v.email, v.grade,
           v.parent ? v.parent.name : "None",
-          v.group, v.ans1, v.ans2, v.ans3]
+          v.group, v.ans1, v.ans2, v.ans3, v.time_range.join("、")]
       end
     end
     content_type 'application/csv'

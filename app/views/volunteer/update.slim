@@ -36,6 +36,8 @@
       = f.label :place, :caption => "地址"
       = f.text_area :place, class: 'u-full-width', value: @user.place
   .ui.dividing.header 活动问题
+  - if @user.group != :none
+    == render './_time_selector', locals: {f: f}, layout: false
   / .field
   /   = f.label :ans1, :caption => "活动预计携带人数*"
   /   = f.number_field :ans1, class: 'u-full-width', required: true, value: @user.ans1
@@ -47,3 +49,4 @@
   /   = f.text_field :ans3, class: 'u-full-width', required: true, value: @user.ans3
   p
     = f.submit "修改信息", :class => "ui button"
+script src="/user/time_select_bit.js"

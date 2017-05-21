@@ -1,6 +1,4 @@
 h1 仪表盘
-
-
 - if @user.group == :none
   h3 你是拼车志愿者，还是需要拼车的新生？
   p 你好 #{@user.name}，你已经成功注册，但请麻烦继续完善信息才能让系统帮忙拼车。
@@ -26,7 +24,11 @@ h1 仪表盘
         .extra.content
           a.ui.teal.button href="/volunteer/volunteerize" 我是志愿者，去填写信息
 .ui.dividing.header 我自己
-  
+p 你好 #{@user.name}。你选择了 #{@user.time_range.join("、")}的时间段。
+- if @user.group == :volunteer
+  p 可以点击上方的“接受 CarPool 申请”手动选择匹配新生，当然也可以等待后台手动分配。
+- if @user.group == :rider
+  p 请耐心等待志愿者的分配。
 .ui.dividing.header 当前状态
 - case @user.group
 - when :none
@@ -65,7 +67,7 @@ h1 仪表盘
   p 一旦有志愿者主动配对上了，会有邮件通知，当然也可以上这个网站查看。
 - when :volunteer
   p 当前是 Carpool 的志愿者。
-  a.ui.positive.button href=url_for(:request, :all) 接受 Carpool 请求
+  a.ui.positive.button href=url_for(:request, :all) 手动接受 Carpool 请求
   h3 目前接受的 Carpool 申请
   p 目前乘客数量：#{@user.passengers_count} / #{@user.max_passengers}
   table.ui.celled.table
@@ -74,7 +76,6 @@ h1 仪表盘
         th 微信
         th 电话
         th 邮箱
-        th 微信
         th 地点
         th 人数
         th 放弃
@@ -86,7 +87,6 @@ h1 仪表盘
           / td= r.time
           td= r.phone
           td= r.email
-          td= r.weixin
           td= r.place
           th= r.passengers
           td
@@ -98,11 +98,13 @@ h1 仪表盘
   .ui.dividing.header 放弃身份
   p 放弃当前身份（拼车申请者，或者拼车志愿者），成为普通的活动参加者。
   =form_for :volunteer, url_for(:volunteer, :discardgroup), :id => 'discard' do |f|
-    p
-      = f.submit "成为普通参加者", :class => "ui button"
+    .field
+      p
+        = f.submit "成为普通参加者", :class => "ui button"
 = form_for :request, '/volunteer/logout', :id => 'logout' do |f|
-  p
-    = f.submit "登出账号",:class => 'ui button'
+  .field
+    p
+      = f.submit "登出账号",:class => 'ui button'
 
 
 - if @user.active

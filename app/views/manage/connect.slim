@@ -2,6 +2,24 @@ h1 手动分配
 p 在这里会列出所有志愿者，每个志愿者会列出信息。
 - @all.each do |v|
     h2= v.name
+    details
+        summary 志愿者详细信息（点击展开）
+        table.ui.celled.table
+            thead
+                tr
+                    th 姓名
+                    th 性别
+                    th 微信
+                    th 邮箱
+                    th 年级
+            tbody
+                tr
+                    td= v.name
+                    td= v.gender
+                    td= v.weixin
+                    td= v.email
+                    td= v.grade
+    p 志愿时间段：#{v.time_range.join(' ')}
     p 当前已经分配到的乘客 #{v.children.size} / #{v.max_passengers}
     ul
         - v.children.each do |c|
@@ -9,12 +27,21 @@ p 在这里会列出所有志愿者，每个志愿者会列出信息。
                 span= c.name
                 span= " "
                 = form_for :volunteer, url_for(:manage, :forfeit, lhs: v.id, rhs: c.id), :id => 'connect' do |f|
-                    = f.submit "放弃", :class => "button"
-    p 时间点上适合的乘客
+                    = f.submit "手动拆开", :class => "button"
+    p 时间点上适合的乘客：#{@all.select{|it| it.group == :rider && it.inclined_taking?(v) && !it.parent}.size}
     ul
         - @all.select{|it| it.inclined_taking?(v) && !it.parent}.each do |c|
             li
                 span= c.name
                 span= " "
-                = form_for :volunteer, url_for(:manage, :connec, lhs: v.id, rhs: c.id), :id => 'forfeit' do |f|
+                = form_for :volunteer, url_for(:manage, :connect, lhs: v.id, rhs: c.id), :id => 'forfeit' do |f|
                     = f.submit "手动匹配", :class => "button"
+    details
+        summary 手动分配任意 rider（点击展开）
+        ul
+            - @all.select{|it| it.group == :rider && !it.parent}.each do |c|
+                li
+                    span= c.name
+                    span= " "
+                    = form_for :volunteer, url_for(:manage, :connect, lhs: v.id, rhs: c.id), :id => 'forfeit' do |f|
+                        = f.submit "手动匹配", :class => "button"

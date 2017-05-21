@@ -1,4 +1,4 @@
-h1 请求总览
+h1 手动接受请求
 p 勾选左边 Checkbox，最后选择“接受申请”就可以接受 Carpool 请求，支持多选。
 p 一旦选择接受对方会收到你的联系信息，为了防止误会希望确认之后选择。
 table.ui.celled.compact.definition.table
@@ -13,21 +13,29 @@ table.ui.celled.compact.definition.table
     tr
       th 
       th 地点
-      th 人数
+      th 预计抵达(参考)
+      th 行李
+      th 航班
+      / th 人数
+      th 属于时间段
   tbody
     - @reqs.each do |r|
       tr v-bind:class="{disabled: disabled(#{r.id}) }"
         td
           input type="checkbox" v-model="selected" :value="#{r.id}"
         td= r.place
-        td= r.passengers
+        td= r.ans2
+        td= r.ans3
+        / td= r.passengers
+        td= r.ans1
+        td= r.time_range.join(", ")
 
 = form_for :volunteer, '/volunteer/take', :id => 'take' do |f|
     tr
       th
       th colspan="4"
         input name="id" v-model="selectedData" style="display: none;"
-        =f.submit "接受申请"
+        =f.submit "接受以上申请", :class => "ui teal button"
 script
   | var app = new Vue({
       el: '#app',

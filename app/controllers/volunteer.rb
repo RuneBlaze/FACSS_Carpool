@@ -131,6 +131,7 @@ UncCarpool::App.controllers :volunteer do
 
   post :discardgroup do
     @user.group = :none
+    @user.ans4 = ''
     @user.save
     success "成功取消当前特殊身份，现在是普通的活动参加者！"
     redirect '/volunteer/me'

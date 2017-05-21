@@ -36,7 +36,7 @@ class Volunteer
   property :ans1, String
   property :ans2, String
   property :ans3, String
-  property :ans4, String
+  property :ans4, String, format: /^[1-9]+[\d]*$/
 
   property :active, Boolean, default: true
 
@@ -90,7 +90,7 @@ class Volunteer
     if rhs.parent
       return [:failed, ""]
     else
-      self.cocar.new(source: self, target: r)
+      self.cocar.new(source: self, target: rhs)
       self.save
       rhs.volunteer << self
       rhs.save
@@ -115,6 +115,45 @@ class Volunteer
       end
     end
   end
+
+  def time_range
+    return [] if ans4.nil?
+    buf = []
+    translate_dic = %w{时间段1 时间段2 时间段3 时间段4 时间段5 时间段6 时间段7 时间段8 时间段9 时间段10}
+    ans4.to_i.to_s(2).chars.reverse.each_with_index do |e, i|
+      if e == '1'
+        buf << translate_dic[i]
+      end
+    end
+    return buf
+  end
+
+  def self.clean_metadata! pw
+    if pw != 'confirm'
+      return 'please add parameter "confirm"'
+    end
+
+    all = Volunteer.all()
+    all.each do |lhs|
+      lhs.children.each do |rhs|
+        lhs.delete_rider! rhs
+      end
+
+      lhs.ans1 = ""
+      lhs.ans2 = ""
+      lhs.ans3 = ""
+      lhs.ans4 = ""
+
+      lhs.passengers = 1
+      lhs.place = ""
+      lhs.memo = ""
+
+      lhs.group = :none
+
+      lhs.save!
+    end
+  end
+  
 end
 
 class Cocar
