@@ -145,7 +145,6 @@ class Volunteer
       lhs.ans4 = ""
 
       lhs.passengers = 1
-      lhs.place = ""
       lhs.memo = ""
 
       lhs.group = :none

@@ -13,7 +13,7 @@ UncCarpool::App.controllers :manage do
   end
 
   get :connect do
-    @all = Volunteer.all()
+    @all = Volunteer.all(group: :volunteer)
     render 'manage/connect'
   end
 
