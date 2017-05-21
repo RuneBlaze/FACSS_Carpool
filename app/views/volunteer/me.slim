@@ -23,8 +23,9 @@ h1 仪表盘
           .ui.sub.header 我愿意在一些特定的时间段帮助接机。
         .extra.content
           a.ui.teal.button href="/volunteer/volunteerize" 我是志愿者，去填写信息
-.ui.dividing.header 我自己
-p 你好 #{@user.name}。你选择了 #{@user.time_range.join("、")}的时间段。
+- if @user.group != :none
+  .ui.dividing.header 我自己
+  p 你好 #{@user.name}。你选择了 #{@user.time_range.join("、")}的时间段。
 - if @user.group == :volunteer
   p 可以点击上方的“接受 CarPool 申请”手动选择匹配新生，当然也可以等待后台手动分配。
 - if @user.group == :rider
