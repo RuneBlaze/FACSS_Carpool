@@ -76,7 +76,7 @@ UncCarpool::App.controllers :manage do
       Volunteer.all().each do |v|
         csv << [v.name, v.gender, v.weixin, v.phone, v.email, v.grade,
           v.parent ? v.parent.name : "None",
-          v.group, v.ans1, v.ans2, v.ans3, v.time_range.join("、")]
+          v.group, v.ans1, v.ans2, v.ans3, v.time_range]
       end
     end
     content_type 'application/csv'

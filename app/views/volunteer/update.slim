@@ -14,7 +14,6 @@
   h3 修改信息
   .row22
     .field
-      
       = f.label :gender, :caption => "性别"
       = f.select(:gender, :options => [['男性', 'male'], ['女性', 'female']], class: 'u-full-width', value: @user.gender)
     .field

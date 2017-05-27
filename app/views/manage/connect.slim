@@ -19,7 +19,7 @@ p 在这里会列出所有志愿者，每个志愿者会列出信息。
                     td= v.weixin
                     td= v.email
                     td= v.grade
-    p 志愿时间段：#{v.time_range.join(' ')}
+    p 志愿时间段：#{v.time_range}
     p 当前已经分配到的乘客 #{v.children.size} / #{v.max_passengers}
     ul
         - v.children.each do |c|

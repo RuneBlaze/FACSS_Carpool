@@ -84,6 +84,9 @@ class Volunteer
   end
 
   def inclined_taking? v
+    if v.ans2.nil?
+      return false
+    end
     lhs = DateTime.parse v.ans2
     rhs = DateTime.parse "2017-08-10 00:00"
     ic = JSON.parse(v.ans4)
@@ -121,16 +124,33 @@ class Volunteer
     end
   end
 
+
+  TIME_DIC = [0,3,6,9,12,15,18,21].map{|it| "#{it}-#{it+3}"}
   def time_range
-    return [] if ans4.nil?
-    buf = []
-    translate_dic = %w{时间段1 时间段2 时间段3 时间段4 时间段5 时间段6 时间段7 时间段8 时间段9 时间段10}
-    ans4.to_i.to_s(2).chars.reverse.each_with_index do |e, i|
-      if e == '1'
-        buf << translate_dic[i]
+    if self.group == :none
+      return nil
+    elsif self.group == :volunteer
+      return "" unless self.ans4
+      buf = ""
+      ranges = JSON.parse(self.ans4)
+      ranges.each do |r|
+        day = 10 + r / 8
+        rg = TIME_DIC[day[r % 8]]
+        buf += "#{day} #{rg}"
       end
+      return buf
+    elsif self.group == :rider
+      return self.ans2
     end
-    return buf
+    # return [] if ans4.nil?
+    # buf = []
+    # translate_dic = %w{时间段1 时间段2 时间段3 时间段4 时间段5 时间段6 时间段7 时间段8 时间段9 时间段10}
+    # ans4.to_i.to_s(2).chars.reverse.each_with_index do |e, i|
+    #   if e == '1'
+    #     buf << translate_dic[i]
+    #   end
+    # end
+    # return buf
   end
 
   def self.clean_metadata! pw

@@ -28,7 +28,7 @@ table.ui.celled.compact.definition.table
         td= r.ans3
         / td= r.passengers
         td= r.ans1
-        td= r.time_range.join(", ")
+        td= r.time_range
 
 = form_for :volunteer, '/volunteer/take', :id => 'take' do |f|
     tr
