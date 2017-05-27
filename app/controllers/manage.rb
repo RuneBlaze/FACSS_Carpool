@@ -2,7 +2,7 @@ require 'csv'
 UncCarpool::App.controllers :manage do
   layout :site
 
-  before except: [:login] do
+  before except: [:session] do
     unless session[:admin]
       redirect '/manage/login'
     end
@@ -17,11 +17,11 @@ UncCarpool::App.controllers :manage do
     render 'manage/connect'
   end
 
-  get :login do
+  get :session do
     render 'manage/login'
   end
 
-  post :login do
+  post :session do
     v = Account.authenticate(params[:account][:email], params[:account][:password])
     if v
       session[:admin] = v
