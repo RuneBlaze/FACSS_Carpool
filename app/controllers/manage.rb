@@ -2,14 +2,18 @@ require 'csv'
 UncCarpool::App.controllers :manage do
   layout :site
 
-  before except: [:session] do
+  before except: [:index, :session] do
     unless session[:admin]
       redirect '/manage/login'
     end
   end
 
   get :index do
-    render 'manage/index'
+    unless session[:admin]
+      redirect '/manage/session'
+    else
+      render 'manage/index'
+    end
   end
 
   get :connect do
@@ -19,6 +23,10 @@ UncCarpool::App.controllers :manage do
 
   get :session do
     render 'manage/login'
+  end
+
+  get :email_all do
+    render 'manage/emailer'
   end
 
   post :session do

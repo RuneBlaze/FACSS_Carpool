@@ -1,3 +1,4 @@
+require 'json'
 class Volunteer
   include DataMapper::Resource
 
@@ -36,7 +37,7 @@ class Volunteer
   property :ans1, String
   property :ans2, String
   property :ans3, String
-  property :ans4, String, format: /^[1-9]+[\d]*$/
+  property :ans4, String
 
   property :active, Boolean, default: true
 
@@ -79,11 +80,15 @@ class Volunteer
   end
 
   def bitfield
-    return ans4.to_i
+    return ans4
   end
 
   def inclined_taking? v
-    v.bitfield & self.bitfield > 0
+    lhs = DateTime.parse v.ans2
+    rhs = DateTime.parse "2017-08-10 00:00"
+    ic = JSON.parse(v.ans4)
+    i = ((lhs - rhs) * 8).to_i
+    return ic.include? i
   end
 
   def take_as_rider! rhs 

@@ -1,0 +1,12 @@
+h1 群发邮件
+
+= form_for :volunteer, '/manage/emailer', :id => 'emailer', :class => 'ui form' do |f|
+    .ui.brown.message
+        | 群发邮件功能比较单一，如果需要更复杂的功能请联系系统管理员。
+
+    .ui.dividing.header 邮件内容
+    .field
+        = f.label :place, :caption => "邮件内容（只支持纯文本）*"
+        = f.text_area :place, class: 'u-full-width', required: true
+    p
+        = f.submit "发送邮件", :class => "ui teal button"

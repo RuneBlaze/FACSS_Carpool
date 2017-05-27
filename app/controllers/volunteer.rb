@@ -168,10 +168,13 @@ UncCarpool::App.controllers :volunteer do
   end
 
   post :notactive do
-    @user.active = false
-    @user.save
-
-    redirect '/volunteer/me'
+    if params[:volunteer][:conf] == "放弃参与"
+      @user.active = false
+      @user.save
+      redirect '/volunteer/me'
+    else
+      return "确认失败"
+    end
   end
 
   post :enroll do

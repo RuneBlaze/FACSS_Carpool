@@ -20,9 +20,12 @@
     = f.label :ans1, caption: "航班号（非必填，推荐填）"
     = f.text_field :ans1, class: 'u-full-width'
   .field
-    = f.label :ans2, caption: "飞机目前预计抵达时间* （格式不限定，要求包含几日几时几分的信息）"
-    = f.text_field :ans2, class: 'u-full-width', value: "8 月 XX 日，几时几分"
-  == render './_time_selector', locals: {f: f}, layout: false
+    = f.label :ans2, caption: "飞机目前预计抵达 RDU 机场时间（请按照 YYYY-MM-DD HH:MM 格式填写）（24 小时制）* "
+    = f.text_field :ans2, class: 'u-full-width js-inline-picker', value: "2017-08-12 13:20"
   p
     = f.submit "提交 Carpool 请求", :class => "ui button"
 script src="/user/time_select_bit.js"
+/ script
+/   | new Picker(document.querySelector('.js-inline-picker'), {
+/       inline: true,
+/     });

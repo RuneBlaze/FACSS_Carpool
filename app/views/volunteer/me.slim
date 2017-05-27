@@ -25,7 +25,7 @@ h1 仪表盘
           a.ui.teal.button href="/volunteer/volunteerize" 我是志愿者，去填写信息
 - if @user.group != :none
   .ui.dividing.header 我自己
-  p 你好 #{@user.name}。你选择了 #{@user.time_range.join("、")}的时间段。
+  p 你好 #{@user.name}，当前登记的邮箱是 #{@user.email}。
 - if @user.group == :volunteer
   p 可以点击上方的“接受 CarPool 申请”手动选择匹配新生，当然也可以等待后台手动分配。
 - if @user.group == :rider
@@ -59,13 +59,15 @@ h1 仪表盘
   table.ui.celled.table
     thead
       tr
-        th 地点 + 备注
-        th 人数
+        th 抵达 RDU 时间
+        th 目标地点
     tbody
       tr
+        td= @user.ans2
         td= @user.place
-        td= @user.passengers
   p 一旦有志愿者主动配对上了，会有邮件通知，当然也可以上这个网站查看。
+
+  p 如果需要改变信息，请点击上方导航条“修改个人信息”以更改登记的信息。
 - when :volunteer
   p 当前是 Carpool 的志愿者。
   a.ui.positive.button href=url_for(:request, :all) 手动接受 Carpool 请求
@@ -95,7 +97,7 @@ h1 仪表盘
               p 不可放弃
             - else
               a href=url_for(:request, :action, id: r.id, type: "forfeit") 放弃
-- if @user.group != :none
+- if @user.group != :none && false #在测试
   .ui.dividing.header 放弃身份
   p 放弃当前身份（拼车申请者，或者拼车志愿者），成为普通的活动参加者。
   =form_for :volunteer, url_for(:volunteer, :discardgroup), :id => 'discard' do |f|
@@ -110,11 +112,11 @@ h1 仪表盘
 
 - if @user.active
   .ui.dividing.header 放弃参加这次活动
-  p 这里可以选择不参加这个活动，账号保留。可以再次登记为参加这个活动，但是清空自己已经接受的 Carpool 申请以及自己的 CarPool 申请。
+  p 这里可以选择不参加这个活动，账号保留。可以再次登记为参加这个活动，但是清空自己已经接受的 Carpool 申请以及自己的 Carpool 申请。
 
   =form_for :volunteer, url_for(:volunteer, :notactive), :id => 'notactive', :class => 'ui form' do |f|
       .field
-        = f.label :conf, :caption => "输入“确认”确认不参加"
+        = f.label :conf, :caption => "输入“放弃参与”确认不参加"
         = f.text_field :conf, class: 'u-full-width', required: true
       = f.submit "放弃参加活动", :class => "ui negative button"
 - else

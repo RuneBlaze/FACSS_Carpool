@@ -1,9 +1,37 @@
+table.ui.compact.celled.definition.table
+    thead
+        tr
+            th
+            - [10,11,12,13,14,15].each_with_index do |e, i|
+                th 8 月 #{e} 日
+    tbody
+        - %w{00-03 03-06 06-09 09-12 12-15 15-18 18-21 21-24}.each_with_index do |e, i|
+            tr
+                td #{e.sub('-',' 到 ')} 时
+                - 6.times do |t|
+                    td
+                        input type="checkbox" onchange="updateBitfield(#{(t)*8 + i}, this.checked)"
+
+table.ui.compact.celled.definition.table
+    thead
+        tr
+            th
+            - [16,17,18,19,20].each_with_index do |e, i|
+                th 8 月 #{e} 日
+    tbody
+        - %w{00-03 03-06 06-09 09-12 12-15 15-18 18-21 21-24}.each_with_index do |e, i|
+            tr
+                td #{e.sub('-',' 到 ')} 时
+                - 5.times do |t|
+                    td
+                        input type="checkbox" onchange="updateBitfield(#{(6 + t)*8 + i}, this.checked)"
+
 .grouped.fields
-    - %w{时间段1 时间段2 时间段3 时间段4 时间段5 时间段6 时间段7 时间段8 时间段9 时间段10}.each_with_index do |e, i|
-        .field
-            .ui.checkbox
-                input type="checkbox" onchange="updateBitfield(#{i}, this.checked)"
-                label= e
+    / - %w{时间段1 时间段2 时间段3 时间段4 时间段5 时间段6 时间段7 时间段8 时间段9 时间段10}.each_with_index do |e, i|
+    /     .field
+    /         .ui.checkbox
+    /             input type="checkbox" onchange="updateBitfield(#{i}, this.checked)"
+    /             label= e
     .field
         = f.label :ans4, :caption => "程序内部用输入，请勿编辑（到时候会遮挡）（为了测试放置在这里） "
         = f.text_field :ans4, class: 'ui input', :id => "final", :value => "0", :readonly => true

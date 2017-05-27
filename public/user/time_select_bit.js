@@ -1,16 +1,19 @@
 function updateBitfield(index, value) {
-      console.log(value);
+      
       var f = document.getElementById('final');
-      var vl = parseInt(f.value);
+      var vl = eval(f.value);
       if (value) {
-        var m = 1 << index;
-        vl = vl | m;
+        vl.push(index);
+        // var m = 1 << index;
+        // vl = vl | m;
       } else {
-        var m = 1 << index;
-        vl = vl ^ m;
+        var i = vl.indexOf(index)
+        vl.splice( i, 1 );
+        // var m = 1 << index;
+        // vl = vl ^ m;
       }
 
-      f.value = vl;
+      f.value = JSON.stringify(vl);
     }
     var f = document.getElementById('final');
-    f.value = "0";
+    f.value = "[]";

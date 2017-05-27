@@ -1,4 +1,5 @@
 Padrino.configure_apps do
+  use Rack::Session::Pool, :expire_after => 2592000 / 15
   # enable :sessions
   set :session_secret, 'e4c14cf23ec99a1813d94693140e586cb72a4788954aa6a3f78feffd6334e4cb'
   set :protection, :except => :path_traversal

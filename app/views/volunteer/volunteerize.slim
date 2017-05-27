@@ -12,22 +12,23 @@
     = f.label :max_passengers, :caption => "能承载接送人数（整数）* "
     = f.number_field :max_passengers, class: 'u-full-width', required: true
   .field
-    = f.label :ans3, :caption => "能承载行李数量（整数）* "
-    = f.number_field :ans3, class: 'u-full-width', required: true
+    = f.label :ans3, :caption => "行李总数* （小行李指 Carry-On 大小）"
+    = f.text_field :ans3, class: 'u-full-width', required: true, value: "X 件大行李、Y 件小行李"
   .ui.dividing.header 接送时间段填写
   p 这些时间段用来表示个人的“偏好”，用于方便后台的管理人员手动分配志愿者对新生的关系。
   p 请麻烦认真考虑后填写。
-  .ui.message 目前为了测试，用的是测试的时间段名称，到时候需要获得确切的时间段。
+  .ui.message 打钩代表这段时间有空并且愿意接受后台对这段时间的手动分配
   == render './_time_selector', locals: {f: f}, layout: false
   / .grouped.fields
+  /   .field
+  /     = f.label :ans4, :caption => "程序内部用输入，请勿编辑（到时候会遮挡）（为了测试放置在这里） "
+  / = f.text_field :ans4, class: 'ui input', :id => "final", :value => "0", :readonly => true
+  p
+    = f.submit "成为志愿者", :class => "ui button"
+script src="/user/time_select_bit.js"
+.fun
   /   - %w{时间段1 时间段2 时间段3 时间段4 时间段5 时间段6 时间段7 时间段8 时间段9 时间段10}.each_with_index do |e, i|
   /     .field
   /       .ui.checkbox
   /         input type="checkbox" onchange="updateBitfield(#{i}, this.checked)"
   /         label= e
-  /   .field
-  /     = f.label :ans4, :caption => "程序内部用输入，请勿编辑（到时候会遮挡）（为了测试放置在这里） "
-  /     = f.text_field :ans4, class: 'ui input', :id => "final", :value => "0", :readonly => true
-  p
-    = f.submit "成为志愿者", :class => "ui button"
-script src="/user/time_select_bit.js"

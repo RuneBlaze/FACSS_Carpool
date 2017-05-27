@@ -36,8 +36,23 @@
       = f.label :place, :caption => "地址"
       = f.text_area :place, class: 'u-full-width', value: @user.place
   .ui.dividing.header 活动问题
-  - if @user.group != :none
+  - if @user.group == :volunteer
     == render './_time_selector', locals: {f: f}, layout: false
+  - if @user.group == :rider
+      .field
+        = f.label :place, :caption => "目标地点（地址或者直接写宿舍名称）*"
+        = f.text_area :place, class: 'u-full-width', required: true
+      .field
+        = f.label :ans3, :caption => "行李总数* （小行李指 Carry-On 大小）"
+        = f.text_field :ans3, class: 'u-full-width', required: true, value: "X 件大行李、Y 件小行李"
+      .ui.dividing.header 时间段有关信息
+      .field
+        = f.label :ans1, caption: "航班号（非必填，推荐填）"
+        = f.text_field :ans1, class: 'u-full-width'
+      .field
+        = f.label :ans2, caption: "飞机目前预计抵达 RDU 机场时间（请按照 YYYY-MM-DD HH:MM 格式填写）（24 小时制）* "
+        = f.text_field :ans2, class: 'u-full-width js-inline-picker', value: "2017-08-12 13:20"
+
   / .field
   /   = f.label :ans1, :caption => "活动预计携带人数*"
   /   = f.number_field :ans1, class: 'u-full-width', required: true, value: @user.ans1
