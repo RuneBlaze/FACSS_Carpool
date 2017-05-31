@@ -4,13 +4,13 @@ UncCarpool::App.controllers :manage do
   layout :site
 
   before except: [:index, :session] do
-    unless session[:admin]
+    unless session[:manage]
       redirect '/manage/index'
     end
   end
 
   get :index do
-    unless session[:admin]
+    unless session[:manage]
       redirect '/manage/session'
     else
       render 'manage/index'
@@ -33,7 +33,7 @@ UncCarpool::App.controllers :manage do
   post :session do
     v = Account.authenticate(params[:account][:email], params[:account][:password])
     if v
-      session[:admin] = v
+      session[:manage] = v
       redirect '/manage'
     else
       return 'Login Failed'
