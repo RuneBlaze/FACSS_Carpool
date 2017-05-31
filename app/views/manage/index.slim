@@ -1,5 +1,6 @@
 h1 后台
-p 当前登录的后台账户 #{session[:admin].email}
+/ p 当前登录的后台账户 #{session[:admin].email}
+p 当前登录的后台账户 #{session[:manage].email}
 
 a.ui.basic.button href="/manage/roster_csv" 花名册
 a.ui.basic.button href="/manage/email_all" 获取邮件列表

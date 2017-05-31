@@ -1,20 +1,17 @@
 require 'csv'
-UncCarpool::App.controllers :manage do
+UncCarpool::App.controllers :back do
+  
   enable :sessions
   layout :site
 
-  before except: [:index, :session] do
+  # before except: [:index, :session] do
     # unless session[:manage]
-    #   redirect '/manage/index'
+    #   redirect '/back/index'
     # end
-  end
+  # end
 
   get :index do
-    unless session[:manage]
-      redirect '/manage/session'
-    else
-      render 'manage/index'
-    end
+    render 'manage/index'
   end
 
   get :connect do
@@ -34,7 +31,7 @@ UncCarpool::App.controllers :manage do
     v = Account.authenticate(params[:account][:email], params[:account][:password])
     if v
       session[:manage] = v
-      redirect '/manage'
+      redirect '/back/index'
     else
       return 'Login Failed'
     end
@@ -84,4 +81,5 @@ UncCarpool::App.controllers :manage do
     attachment 'facss-carpool-roster.csv'
     res
   end
+
 end
