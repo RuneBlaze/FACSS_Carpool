@@ -3,11 +3,11 @@ table.ui.compact.celled.definition.table
         tr
             th
             - [10,11,12,13,14,15].each_with_index do |e, i|
-                th 8 月 #{e} 日
+                th= "8月" + e.to_s + "日(周" + %w{四 五 六 日 一 二}[i] +")"
     tbody
         - %w{00-03 03-06 06-09 09-12 12-15 15-18 18-21 21-24}.each_with_index do |e, i|
             tr
-                td #{e.sub('-',' 到 ')} 时
+                td #{e.sub('-','-')}时
                 - 6.times do |t|
                     td
                         input type="checkbox" onchange="updateBitfield(#{(t)*8 + i}, this.checked)"
@@ -17,11 +17,11 @@ table.ui.compact.celled.definition.table
         tr
             th
             - [16,17,18,19,20].each_with_index do |e, i|
-                th 8 月 #{e} 日
+                th= "8月" + e.to_s + "日(周" + %w{三 四 五 六 日}[i] +")"
     tbody
         - %w{00-03 03-06 06-09 09-12 12-15 15-18 18-21 21-24}.each_with_index do |e, i|
             tr
-                td #{e.sub('-',' 到 ')} 时
+                td #{e.sub('-','-')}时
                 - 5.times do |t|
                     td
                         input type="checkbox" onchange="updateBitfield(#{(6 + t)*8 + i}, this.checked)"
