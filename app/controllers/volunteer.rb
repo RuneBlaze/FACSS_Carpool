@@ -175,6 +175,7 @@ UncCarpool::App.controllers :volunteer do
       @user.ans2 = ''
       @user.ans3 = ''
       @user.ans4 = ''
+      @user.delete_all_rider!
       @user.save
       redirect '/volunteer/me'
     else

@@ -117,10 +117,25 @@ class Volunteer
         r.volunteer = []
         r.save!
         self.save!
+        email do
+            @vol = self
+            @req = r
+            from "facss_carpool_service@unc.edu"
+            to r.email
+            content_type :html
+            subject "FACSS Carpool Service 志愿者取消匹配"
+            render 'email/request_forfeit'
+        end
         return [:ok, self]
       else
         return [:failed, "permission denied"]
       end
+    end
+  end
+
+  def delete_all_rider!
+    self.children.each do |c|
+      self.delete_rider! c
     end
   end
 
