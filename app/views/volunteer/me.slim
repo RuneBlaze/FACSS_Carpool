@@ -1,4 +1,7 @@
 h1 仪表盘
+- unless @user.active
+  .ui.red.message
+    | 当前状态为“不参加活动”，如果要参加活动，请点击本页最下方的“参加活动”按钮。
 - if @user.group == :none
   h3 你是拼车志愿者，还是需要拼车的新生？
   p 你好 #{@user.name}，你已经成功注册，但请麻烦继续完善信息才能让系统帮忙拼车。
@@ -104,6 +107,7 @@ h1 仪表盘
     .field
       p
         = f.submit "成为普通参加者", :class => "ui button"
+.ui.dividing.header 登出账号
 = form_for :request, '/volunteer/logout', :id => 'logout' do |f|
   .field
     p

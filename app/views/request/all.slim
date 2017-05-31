@@ -17,7 +17,7 @@ table.ui.celled.compact.definition.table
       th 行李
       th 航班
       / th 人数
-      th 属于时间段
+      / th 属于时间段
   tbody
     - @reqs.each do |r|
       tr v-bind:class="{disabled: disabled(#{r.id}) }"
@@ -28,7 +28,7 @@ table.ui.celled.compact.definition.table
         td= r.ans3
         / td= r.passengers
         td= r.ans1
-        td= r.time_range
+        / td= r.time_range
 
 = form_for :volunteer, '/volunteer/take', :id => 'take' do |f|
     tr

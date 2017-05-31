@@ -170,6 +170,11 @@ UncCarpool::App.controllers :volunteer do
   post :notactive do
     if params[:volunteer][:conf] == "放弃参与"
       @user.active = false
+      @user.group = :none
+      @user.ans1 = ''
+      @user.ans2 = ''
+      @user.ans3 = ''
+      @user.ans4 = ''
       @user.save
       redirect '/volunteer/me'
     else

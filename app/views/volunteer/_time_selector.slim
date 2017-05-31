@@ -32,6 +32,6 @@ table.ui.compact.celled.definition.table
     /         .ui.checkbox
     /             input type="checkbox" onchange="updateBitfield(#{i}, this.checked)"
     /             label= e
-    .field
+    .field style="display: none;"
         = f.label :ans4, :caption => "程序内部用输入，请勿编辑（到时候会遮挡）（为了测试放置在这里） "
         = f.text_field :ans4, class: 'ui input', :id => "final", :value => "0", :readonly => true
