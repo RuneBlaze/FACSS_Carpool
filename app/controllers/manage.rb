@@ -1,10 +1,11 @@
 require 'csv'
 UncCarpool::App.controllers :manage do
+  enable :sessions
   layout :site
 
   before except: [:index, :session] do
     unless session[:admin]
-      redirect '/manage/login'
+      redirect '/manage/index'
     end
   end
 
