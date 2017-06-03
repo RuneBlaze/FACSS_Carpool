@@ -84,10 +84,16 @@ class Volunteer
   end
 
   def inclined_taking? v
-    if v.ans2.nil?
+    if v.ans2.nil? || v.ans2.empty?
       return false
     end
-    lhs = DateTime.parse v.ans2
+    value = v.ans2
+    lhs = nil
+    begin
+      lhs = DateTime.parse value
+    rescue ArgumentError => exception
+      return false
+    end
     rhs = DateTime.parse "2017-08-10 00:00"
     ic = JSON.parse(v.ans4)
     i = ((lhs - rhs) * 8).to_i

@@ -31,7 +31,7 @@ UncCarpool::App.controllers :back do
     v = Account.authenticate(params[:account][:email], params[:account][:password])
     if v
       session[:manage] = v
-      redirect '/back/index'
+      redirect '/back'
     else
       return 'Login Failed'
     end
