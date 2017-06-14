@@ -23,11 +23,11 @@
     = f.text_field :ans1, class: 'u-full-width', required: true, placeholder: "请务必对照机票信息填写"
   .field
     = f.label :ans2, caption: "飞机目前预计抵达 RDU 机场时间（请按照 YYYY-MM-DD HH:MM 格式填写）（24 小时制）* "
-    = f.text_field :ans2, class: 'u-full-width js-inline-picker', value: "2017-08-12 13:20"
+    = f.text_field :ans2, class: 'u-full-width js-inline-picker', value: "2017-08-12 13:20", style: "color: #aaa;", onkeypress: "this.style = ''; this.onkeypress=null"
   p
     = f.submit "提交 Carpool 请求", :class => "ui button"
 script src="/user/time_select_bit.js"
-/ script
-/   | new Picker(document.querySelector('.js-inline-picker'), {
-/       inline: true,
-/     });
+script
+  | document.querySelector('.js-inline-picker').onChange(function() {
+      alert("bye");
+    })
