@@ -24,7 +24,7 @@ module UncCarpool
     end
 
     get '/' do
-      render 'index', layout: 'site'
+      render 'outage', layout: 'site'
     end
 
     get '/about' do
