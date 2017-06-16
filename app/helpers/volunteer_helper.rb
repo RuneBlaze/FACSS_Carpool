@@ -31,7 +31,7 @@ module UncCarpool
           to target
           content_type :html
           subject "FACSS Carpool Service 密码重置"
-          render 'email/reset', locals: {code: c}
+          render 'email/reset_masu', locals: {code: c}
         end
       end
 

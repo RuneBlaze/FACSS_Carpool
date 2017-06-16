@@ -40,16 +40,16 @@ UncCarpool::App.controllers :volunteer do
     end
   end
 
-  get :resetmasu, :with => :id do
-    email = params[:id]
-    v = Volunteer.first(id: email)
-    unless v
-      render('li', locals: {mes: 'Email not found!'})
-    else
-      send_reset_email_masu(v)
-      render('li', locals: {mes: 'Email sent! 请查阅邮件！'})
-    end
-  end
+  # get :resetmasu, :with => :id do
+  #   email = params[:id]
+  #   v = Volunteer.first(id: email)
+  #   unless v
+  #     render('li', locals: {mes: 'Email not found!'})
+  #   else
+  #     send_reset_email_masu(v)
+  #     render('li', locals: {mes: 'Email sent! 请查阅邮件！'})
+  #   end
+  # end
 
   get :repassword do
     c = params[:code]
