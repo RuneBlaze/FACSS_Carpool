@@ -36,7 +36,7 @@ UncCarpool::App.controllers :volunteer do
       render('li', locals: {mes: 'Email not found!'})
     else
       send_reset_email(v)
-      render('li', locals: {mes: 'Email sent!'})
+      render('li', locals: {mes: 'Email sent! 请查阅邮件！'})
     end
   end
 
