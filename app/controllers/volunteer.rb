@@ -14,7 +14,7 @@ UncCarpool::App.controllers :volunteer do
     render 'volunteer/login'
   end
 
-  before :except => [:login, :new, :create, :confirm, :reset, :repassword, :passreset] do
+  before :except => [:login, :new, :create, :confirm, :reset, :repassword, :passreset, :resetmasu] do
     @user = Volunteer.first(id: session[:uid])
     if !@user
       return "403"
