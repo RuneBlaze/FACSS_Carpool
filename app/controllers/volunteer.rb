@@ -14,7 +14,7 @@ UncCarpool::App.controllers :volunteer do
     render 'volunteer/login'
   end
 
-  before :except => [:login, :new, :create, :confirm, :reset] do
+  before :except => [:login, :new, :create, :confirm, :reset, :repassword, :passreset] do
     @user = Volunteer.first(id: session[:uid])
     if !@user
       return "403"
@@ -55,6 +55,7 @@ UncCarpool::App.controllers :volunteer do
   post :passreset do
     arg = params[:volunteer]
     v = Volunteer.first(arg[:code])
+    v.password = arg[:password]
     if v.save
       render('li', locals: {mes: 'Reset success!'})
     else

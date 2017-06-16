@@ -25,7 +25,7 @@ module UncCarpool
         v.save
         target = v.email
         code = v.email_code
-        c = url_for(:volunteer, :repassword, code: code)
+        c = uri(url_for(:volunteer, :repassword, code: code))
         email do
           from "facss_carpool_service@unc.edu"
           to target
@@ -40,7 +40,7 @@ module UncCarpool
         v.save
         target = v.email
         code = v.email_code
-        c = url_for(:volunteer, :repassword, code: code)
+        c = uri(url_for(:volunteer, :repassword, code: code))
 
         email do
           from "facss_carpool_service@unc.edu"
