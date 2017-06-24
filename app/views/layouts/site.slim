@@ -5,60 +5,24 @@ head
   link rel="stylesheet" href="/semantic.min.css"
   script src="/javascripts/vue.min.js"
   meta name='viewport' content='width=device-width, initial-scale=1'
-style
-  |
-    .ui.footer.segment {
-      margin: 5em 0em 0em;
-      padding: 5em 0em;
-    }
 body
-  .ui.fixed.violet.main.menu
-    .ui.container
-      a.item.header href="/" FACSS Carpool
-      - unless @user
-        a.item href="/volunteer/new" 参与者登记/注册
-        a.item href="/volunteer/login" 登录
-      - else
-        a.item href="/volunteer/update" 修改个人信息
-      - if @user
-        a.item href="/volunteer/me" 个人 Dashboard
-        - if @user.group == :volunteer
-          a.item href="/request/all" 接受 CarPool 申请
-      a.right.item href="/back/session" 后台
-  .ui.vertical.blue.inverted.sidebar.menu.left
-    a.item href="/" 首页
-    - unless @user
-      a.item href="/volunteer/new" 用户注册
-      a.item href="/volunteer/login" 用户登录
-    a.item href="/volunteer/update" 修改个人信息
-    - if @user
-      a.item href="/volunteer/me" 个人 Dashboard
-      a.item href="/request/all" 接受 CarPool 申请
+  .ui.container style="padding-top: 3em;"
+    h1 维护
+    .ui.red.message 
+      | 因为数据库各种崩坏，为了探索更好的解决方案以及进行下一阶段的的维护，关停直到北京时间 27 日。
     
-  .ui.container#app style="padding-top: 7em;"
-    .ui.grid 
-      .ui.one.wide.column
-      .ui.fourteen.wide.column
-        - if flash[:errors]
-          .ui.negative.message
-            .header 出现问题！
-            ul
-              - flash[:errors].each do |e|
-                el= e
-        - if flash[:success]
-          .ui.positive.message
-            .header 成功！
-            ul
-              - flash[:success].each do |e|
-                el= e
-        == yield
-      .ui.one.wide.column
-  .ui.inverted.vertical.teal.segment.footer
-    .ui.left.aligned.container
-      .ui.stackable.inverted.divided.grid
-        .six.wide.column
-          .ui.inverted.header About
-          p facss_carpool_service@unc.edu <br>FACSS 活动 Carpool 系统测试版
-        .ten.wide.column
-          .ui.inverted.header 开源
-          a href="https://github.com/RuneBlaze/FACSS_Carpool" target="_blank" style="color: white;" <i class="github icon"></i>Github
+    h4.ui.dividing.header 关于数据
+    p 说的直白点是所有密码再次丢失，对此再次表示抱歉。
+
+    h4.ui.dividing.header 关于数据库
+    p 
+      | 学校的 Openshift 平台在 22 号进行了一次没有预料到的所有程序重新部署，因为没有及时保存数据库数据再次丢失。
+        重要数据可以从其他渠道还原。
+
+    h4.ui.dividing.header 关于这件事
+    p 
+      | 个人原因最近无法修理这些自己当初没有考虑好的问题，同时因为要增加新的后台管理功能，暂时决定停止服务。
+        对此，再次表示抱歉。要抱怨的话真的，重新部署程序这种事情 AWS, DigitalOcean, Linode 之类的都不会随便发生，
+        所以个人对这件事也在探索怎样做才能最好。
+
+    p 于是大概就是这种状况，欢迎联系微信 ninesyllables 或者邮箱 facss_carpool_service@unc.edu 提意见、发牢骚等任何事情。
