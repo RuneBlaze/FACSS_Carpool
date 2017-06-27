@@ -35,6 +35,10 @@ module UncCarpool
       render 'about', layout: 'site'
     end
 
+    get '/status' do
+      render 'status', layout: 'site'
+    end
+
     get '/construction' do
       render 'construction', layout: 'site'
     end

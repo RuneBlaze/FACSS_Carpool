@@ -21,6 +21,30 @@ def reconstruct_data str
     end
 end
 
+def recover_from_email str
+    tokens = str.split(' ')
+    pwd = tokens[5].split("@")[0].chars.shuffle.join + "#{rand(1000)}"
+    p pwd
+    v = Volunteer.create(
+        name: tokens[0],
+        gender: tokens[1],
+        weixin: tokens[4],
+        phone: tokens[3],
+        email: tokens[5],
+        password: pwd,
+        grade: tokens[2],
+        group: :none,
+        ans1: "",
+        ans2: "",
+        ans3: "",
+        confirmed: true,
+        ans4: ""
+    )
+    unless v.saved?
+        raise 'not saved!'
+    end
+end
+
 
 require 'json'
 TIME_DIC = [0,3,6,9,12,15,18,21].map{|it| "#{it}-#{it+3}"}
