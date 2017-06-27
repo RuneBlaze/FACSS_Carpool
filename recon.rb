@@ -16,27 +16,11 @@ def reconstruct_data str
         confirmed: true,
         ans4: str[11] &&! str[11].include?(':') ? recons(str[11]) : nil
     )
-    p pwd
     unless v.saved?
         raise 'not saved!'
     end
 end
 
-v = Volunteer.new(
-        name: str[0],
-        password: pwd,
-        gender: str[1],
-        weixin: str[2],
-        phone: str[3],
-        email: str[4],
-        grade: str[5].downcase.to_sym,
-        group: str[7].downcase.to_sym,
-        ans1: str[8],
-        ans2: str[9],
-        ans3: str[10],
-        confirmed: true,
-        ans4: str[11] &&! str[11].include?(':') ? recons(str[11]) : nil
-    )
 
 require 'json'
 TIME_DIC = [0,3,6,9,12,15,18,21].map{|it| "#{it}-#{it+3}"}
