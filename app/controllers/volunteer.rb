@@ -65,11 +65,12 @@ UncCarpool::App.controllers :volunteer do
 
   post :passreset do
     arg = params[:volunteer]
-    v = Volunteer.first(arg[:code])
+    v = Volunteer.first(email_code: arg[:code])
     v.password = arg[:password]
     if v.save
       render('li', locals: {mes: 'Reset success!'})
     else
+      render('li', locals: {mes: 'Reset unsuccessful'})
       flash[:errors] = v.errors.map(&:to_s)
       render '/volunteer/repassword', locals: {code: c}
     end
