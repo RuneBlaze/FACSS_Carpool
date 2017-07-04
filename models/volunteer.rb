@@ -15,7 +15,7 @@ class Volunteer
   property :grade, Enum[:undergrad, :grad, :phd, :prof, :alumni, :visiting], default: :undergrad
 
   # property :school, String, :unique => true
-  property :phone, String, :required => true, format: /^(\([0-9]{3}\) |[0-9]{3})[0-9]{3}[0-9]{4,5}$/
+  property :phone, String, :required => true#, format: /^(\([0-9]{3}\) |[0-9]{3})[0-9]{3}[0-9]{4,5}$/
   property :weixin, String
 
   # Auxilary Properties

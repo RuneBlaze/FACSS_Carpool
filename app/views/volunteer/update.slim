@@ -23,7 +23,7 @@
   .row2
     .field
       
-      = f.label :phone, :caption => "电话号码 Phone"
+      = f.label :phone, :caption => "电话号码 Phone，只填数字"
       = f.telephone_field :phone, class: 'u-full-width', pattern: '[\d-]+', value: @user.phone
     .field
       

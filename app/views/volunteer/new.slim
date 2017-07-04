@@ -31,7 +31,7 @@
       = f.label :grade, :caption => "年级*"
       = f.select(:grade, :options => [['本科生', 'undergrad'], ['研究生', 'grad'], ['PHD', 'phd'], ['校友', 'alumni'], ['访问学者', 'visiting'], ['教职','prof']], class: 'u-full-width')
     .field
-      = f.label :phone, :caption => "电话号码 Phone* （10 位数字或者 9 位数字），有美国电话优先填写美国电话"
+      = f.label :phone, :caption => "电话号码 Phone* （中国手机号或者美国手机号，只填数字），有美国电话优先填写美国电话"
       = f.phone_field :phone, class: 'u-full-width', required: false, pattern: '[\d]+'
     .field
       = f.label :weixin, :caption => "微信"
