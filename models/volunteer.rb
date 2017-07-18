@@ -157,7 +157,7 @@ class Volunteer
       ranges.each do |r|
         day = 10 + r / 8
         rg = TIME_DIC[day[r % 8]]
-        buf += "#{day} #{rg}"
+        buf += "2017/8/#{day}:#{rg},"
       end
       return buf
     elsif self.group == :rider
