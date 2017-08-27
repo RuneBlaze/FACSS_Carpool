@@ -35,6 +35,7 @@ gem 'faker'
 gem 'padrino', '0.13.3.3'
 gem 'postmark'
 gem "graphql"
+gem "sentry-raven"
 
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'

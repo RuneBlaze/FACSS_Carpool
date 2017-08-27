@@ -5,4 +5,4 @@ bin/*
 vendor/gems/*
 !vendor/gems/cache/
 .sass-cache/*
-#config/credentials.rb
+config/credentials.rb
