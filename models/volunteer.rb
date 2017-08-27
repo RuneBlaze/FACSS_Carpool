@@ -156,7 +156,7 @@ class Volunteer
       ranges = JSON.parse(self.ans4)
       ranges.each do |r|
         day = 10 + r / 8
-        rg = TIME_DIC[day[r % 8]]
+        rg = TIME_DIC[r % 8]
         buf += "2017/8/#{day}:#{rg},"
       end
       return buf
