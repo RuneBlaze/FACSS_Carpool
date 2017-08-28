@@ -13,10 +13,10 @@ table.ui.celled.compact.definition.table
     tr
       th 
       th 地点
-      th 预计抵达(参考)
-      th 行李
-      th 航班
-      / th 人数
+      / th 预计抵达(参考)
+      / th 行李
+      / th 航班
+      th 人数
       / th 属于时间段
   tbody
     - @reqs.each do |r|
@@ -24,10 +24,10 @@ table.ui.celled.compact.definition.table
         td
           input type="checkbox" v-model="selected" :value="#{r.id}"
         td= r.place
-        td= r.ans2
-        td= r.ans3
-        / td= r.passengers
-        td= r.ans1
+        / td= r.ans2
+        / td= r.ans3
+        td= r.passengers
+        / td= r.ans1
         / td= r.time_range
 
 = form_for :volunteer, '/volunteer/take', :id => 'take' do |f|
@@ -35,7 +35,7 @@ table.ui.celled.compact.definition.table
       th
       th colspan="4"
         input name="id" v-model="selectedData" style="display: none;"
-        =f.submit "接受以上申请", :class => "ui teal button"
+        =f.submit "接受以上申请", :class => "ui brown button"
 script
   | var app = new Vue({
       el: '#app',

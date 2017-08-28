@@ -20,37 +20,41 @@
       
       = f.label :grade, :caption => "年级"
       = f.select(:grade, :options => [['本科生', 'undergrad'], ['研究生', 'grad'], ['PHD', 'phd'], ['校友', 'alumni'], ['访问学者', 'visiting'], ['教职','prof']], class: 'u-full-width', value: @user.grade)
-  .row2
+  .row22
     .field
-      
       = f.label :phone, :caption => "电话号码 Phone，只填数字"
       = f.telephone_field :phone, class: 'u-full-width', pattern: '[\d-]+', value: @user.phone
     .field
-      
       = f.label :weixin, :caption => "微信"
       = f.text_field :weixin, class: 'u-full-width', value: @user.weixin
-  .row2
-    .field
-      
-      = f.label :place, :caption => "地址"
-      = f.text_area :place, class: 'u-full-width', value: @user.place
+  .row22
+
   .ui.dividing.header 活动问题
   - if @user.group == :volunteer
-    == render './_time_selector', locals: {f: f}, layout: false
+    / == render './_time_selector', locals: {f: f}, layout: false
+    .field
+      = f.label :max_passengers, :caption => "能承载接送人数（整数）* "
+      = f.number_field :max_passengers, class: 'u-full-width', required: true, value: @user.max_passengers
   - if @user.group == :rider
       .field
-        = f.label :place, :caption => "目标地点（地址或者直接写宿舍名称）*"
-        = f.text_area :place, class: 'u-full-width', required: true
+        = f.label :place, :caption => "拼车出发地址"
+        = f.text_area :place, class: 'u-full-width', value: @user.place
       .field
-        = f.label :ans3, :caption => "行李总数* （小行李指 Carry-On 大小）"
-        = f.text_field :ans3, class: 'u-full-width', required: true, value: "X 件大行李、Y 件小行李"
-      .ui.dividing.header 时间段有关信息
-      .field
-        = f.label :ans1, caption: "航班号（非必填，推荐填）"
-        = f.text_field :ans1, class: 'u-full-width'
-      .field
-        = f.label :ans2, caption: "飞机目前预计抵达 RDU 机场时间（请按照 YYYY-MM-DD HH:MM 格式填写）（24 小时制）* "
-        = f.text_field :ans2, class: 'u-full-width js-inline-picker', value: "2017-08-12 13:20"
+        = f.label :passengers, :caption => "拼车总共人数"
+        = f.number_field :passengers, class: 'u-full-width', value: @user.passengers
+      / .field
+      /   = f.label :place, :caption => "目标地点（地址或者直接写宿舍名称）*"
+      /   = f.text_area :place, class: 'u-full-width', required: true
+      / .field
+      /   = f.label :ans3, :caption => "行李总数* （小行李指 Carry-On 大小）"
+      /   = f.text_field :ans3, class: 'u-full-width', required: true, value: "X 件大行李、Y 件小行李"
+      / .ui.dividing.header 时间段有关信息
+      / .field
+      /   = f.label :ans1, caption: "航班号（非必填，推荐填）"
+      /   = f.text_field :ans1, class: 'u-full-width'
+      / .field
+      /   = f.label :ans2, caption: "飞机目前预计抵达 RDU 机场时间（请按照 YYYY-MM-DD HH:MM 格式填写）（24 小时制）* "
+      /   = f.text_field :ans2, class: 'u-full-width js-inline-picker', value: "2017-08-12 13:20"
 
   / .field
   /   = f.label :ans1, :caption => "活动预计携带人数*"
@@ -62,5 +66,5 @@
   /   = f.label :ans3, :caption => "对于 BBQ 活动内容有什么期望吗？*"
   /   = f.text_field :ans3, class: 'u-full-width', required: true, value: @user.ans3
   p
-    = f.submit "修改信息", :class => "ui button"
+    = f.submit "修改信息", :class => "ui brown button"
 script src="/user/time_select_bit.js"

@@ -3,6 +3,10 @@
 /   p 近期由于服务器出现事故，大部分再次密码丢失，如果发现登录不上，请直接使用下面的密码重设链接。
 /   p 对带来的不便表示歉意，具体请参照 <a href="/status">事故报道</a>。
 
+.ui.brown.message
+    p 为了方便系统更新，开学前的账号已经被清空。
+    p 如果是 2017 年秋季开学之前的账号，请麻烦重新注册。
+
 = form_for :volunteer, '/volunteer/login', :id => 'login', :class => 'ui form' do |f|
   .field
     = f.label :email, :caption => "电子邮件（Email）"
@@ -10,6 +14,6 @@
   .field
     = f.label :password, :caption => "密码（Password）"
     = f.password_field :password
-  = f.submit "登录", :class => "ui teal button"
+  = f.submit "登录", :class => "ui brown button"
 
 a href="/volunteer/reset" 密码重设

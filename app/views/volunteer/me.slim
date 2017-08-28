@@ -1,9 +1,9 @@
 h1 仪表盘
 - unless @user.active
-  .ui.red.message
+  .ui.brown.message
     | 当前状态为“不参加活动”，如果要参加活动，请点击本页最下方的“参加活动”按钮。
 - if @user.group == :none
-  h3 你是拼车志愿者，还是需要拼车的新生？
+  h3 你是拼车志愿者，还是需要拼车的参与者？
   p 你好 #{@user.name}，你已经成功注册，但请麻烦继续完善信息才能让系统帮忙拼车。
   .ui.buttons
     / a.ui.button  我需要申请拼车配对
@@ -13,24 +13,24 @@ h1 仪表盘
     .eight.wide.column
       .ui.card
         .content
-          .header 我是新生
+          .header 我需要拼车配对
         .content
-          .ui.sub.header 我是即将进入 UNC 的新生。我需要志愿者接机。
+          .ui.sub.header 我要参加这次活动，同时我需要志愿者把我接到活动场地。
         .extra.content
-          a.ui.teal.button href="/volunteer/riderize" 对，我是新生，去填写信息
+          a.ui.brown.button href="/volunteer/riderize" 对，我需要拼车配对
     .eight.wide.column
       .ui.card
         .content
           .header 我是志愿者
         .content
-          .ui.sub.header 我愿意在一些特定的时间段帮助接机。
+          .ui.sub.header 我愿意帮助接送活动参与者到活动场地。
         .extra.content
-          a.ui.teal.button href="/volunteer/volunteerize" 我是志愿者，去填写信息
+          a.ui.brown.button href="/volunteer/volunteerize" 对，我是志愿者
 - if @user.group != :none
   .ui.dividing.header 我自己
   p 你好 #{@user.name}，当前登记的邮箱是 #{@user.email}。
 - if @user.group == :volunteer
-  p 可以点击上方的“接受 CarPool 申请”手动选择匹配新生，当然也可以等待后台手动分配。
+  p 可以点击上方的“接受 CarPool 申请”手动选择匹配其他其他参与者，也可以等待后台手动分配。
 - if @user.group == :rider
   p 请耐心等待志愿者的分配。
 .ui.dividing.header 当前状态
@@ -62,15 +62,18 @@ h1 仪表盘
   table.ui.celled.table
     thead
       tr
-        th 抵达 RDU 时间
-        th 目标地点
+        / th 抵达 RDU 时间
+        th 人数
+        th 出发地点
     tbody
       tr
-        td= @user.ans2
+        / td= @user.ans2
+        td= @user.passengers
         td= @user.place
   p 一旦有志愿者主动配对上了，会有邮件通知，当然也可以上这个网站查看。
 
   p 如果需要改变信息，请点击上方导航条“修改个人信息”以更改登记的信息。
+  p 如果已经被匹配了志愿者，并且要改变信息，请直接与志愿者联系。
 - when :volunteer
   p 当前是 Carpool 的志愿者。
   a.ui.positive.button href=url_for(:request, :all) 手动接受 Carpool 请求
@@ -127,4 +130,4 @@ h1 仪表盘
   .ui.dividing.header 参加这次活动
   p 将自己的状态改为“参加”。
   =form_for :volunteer, url_for(:volunteer, :enroll), :id => 'enroll', :class => 'ui form' do |f|
-      = f.submit "参加活动", :class => "ui positive button"
+      = f.submit "参加活动", :class => "ui brown button"

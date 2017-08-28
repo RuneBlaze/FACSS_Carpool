@@ -16,7 +16,7 @@ body
     .ui.container
       a.item.header href="/"
         - if Volunteer.first
-          span FACSS Carpool
+          span Carpool@秋季BBQ
         - else
           span 数据库已经出错，如果方便联系请发邮箱到底下的邮箱
       - unless @user
@@ -27,9 +27,9 @@ body
       - if @user
         a.item href="/volunteer/me" 个人 Dashboard
         - if @user.group == :volunteer
-          a.item href="/request/all" 接受 CarPool 申请
+          a.item href="/request/all" 接受 Carpool 申请
       a.right.item href="/back/session" 后台
-  .ui.vertical.blue.inverted.sidebar.menu.left
+  .ui.vertical.brown.inverted.sidebar.menu.left
     a.item href="/" 首页
     - unless @user
       a.item href="/volunteer/new" 用户注册
@@ -57,7 +57,7 @@ body
                 el= e
         == yield
       .ui.one.wide.column
-  .ui.inverted.vertical.teal.segment.footer
+  .ui.inverted.vertical.brown.segment.footer
     .ui.left.aligned.container
       .ui.stackable.inverted.divided.grid
         .six.wide.column

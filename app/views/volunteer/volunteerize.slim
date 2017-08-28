@@ -6,26 +6,30 @@
           li= e
   h1 我要成为志愿者
   p 感谢成为志愿者，成为志愿者之后可以接受其他人提出来的拼车请求。
+  .ui.dividing.header 关于拼车过程本身
+  p 志愿者可以主动选择参与者，这样的话参与者会收到邮件提示匹配。
+  p 后台人员在活动报名结束后也会开始手动分配参与者与志愿者。
+  p TODO：完善这段语言
   .ui.dividing.header 志愿者信息填写
-  .ui.message 以下信息会被用于后台手动分配。
+  / .ui.message 以下信息会被用于后台手动分配。
   .field
     = f.label :max_passengers, :caption => "能承载接送人数（整数）* "
     = f.number_field :max_passengers, class: 'u-full-width', required: true
-  .field
-    = f.label :ans3, :caption => "能承载行李总数* （小行李指 Carry-On 大小）"
-    = f.text_field :ans3, class: 'u-full-width', required: true, value: "X 件大行李、Y 件小行李"
-  .ui.dividing.header 接送时间段填写
-  p 这些时间段用来表示个人的“偏好”，用于方便后台的管理人员手动分配志愿者对新生的关系。
-  p 请麻烦认真考虑后填写。
-  p 当然，自己主动前去接受新生的请求是不受下面填写的时间段的限制的，以下的信息只用于后台人员手动分配时使用。
-  .ui.message 打钩代表这段时间有空并且愿意接受后台对这段时间的手动分配
-  == render './_time_selector', locals: {f: f}, layout: false
+  / .field
+  /   = f.label :ans3, :caption => "能承载行李总数* （小行李指 Carry-On 大小）"
+  /   = f.text_field :ans3, class: 'u-full-width', required: true, value: "X 件大行李、Y 件小行李"
+  / .ui.dividing.header 接送时间段填写
+  / p 这些时间段用来表示个人的“偏好”，用于方便后台的管理人员手动分配志愿者对新生的关系。
+  / p 请麻烦认真考虑后填写。
+  / p 当然，自己主动前去接受新生的请求是不受下面填写的时间段的限制的，以下的信息只用于后台人员手动分配时使用。
+  / .ui.message 打钩代表这段时间有空并且愿意接受后台对这段时间的手动分配
+  / == render './_time_selector', locals: {f: f}, layout: false
   / .grouped.fields
   /   .field
   /     = f.label :ans4, :caption => "程序内部用输入，请勿编辑（到时候会遮挡）（为了测试放置在这里） "
   / = f.text_field :ans4, class: 'ui input', :id => "final", :value => "0", :readonly => true
   p
-    = f.submit "成为志愿者", :class => "ui button"
+    = f.submit "成为志愿者", :class => "ui brown button"
 script src="/user/time_select_bit.js"
 .fun
   /   - %w{时间段1 时间段2 时间段3 时间段4 时间段5 时间段6 时间段7 时间段8 时间段9 时间段10}.each_with_index do |e, i|
