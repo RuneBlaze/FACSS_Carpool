@@ -68,13 +68,17 @@ UncCarpool::App.controllers :back do
     g = params[:group]
   end
 
+
+  HEADERS = %w{
+    Name Gender Weixin Phone Email Grade 分配的志愿者 Group 出发地点 总共拼车人数 总共承载人数
+  }
   get :roster_csv do
     res = CSV.generate do |csv|
-      csv << ["Name", "Gender", "Weixin", "Phone", "Email", "Grade", "Volunteer", "Group", "Ans1", "Ans2", "Ans3", "时间段"]
+      csv << HEADERS
       Volunteer.all().each do |v|
         csv << [v.name, v.gender, v.weixin, v.phone, v.email, v.grade,
           v.parent ? v.parent.name : "None",
-          v.group, v.ans1, v.ans2, v.ans3, v.time_range]
+          v.group, v.place, v.passengers, v.max_passengers]
       end
     end
     content_type 'application/csv'

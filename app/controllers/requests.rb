@@ -10,6 +10,10 @@ UncCarpool::App.controllers :request do
     if !@user
       render('li', locals: {mes: 'volunteer not found'})
     end
+
+    if @user.group != :volunteer
+      render('li', locals: {mes: 'error: not a volunteer; should not see all requests'})
+    end
   end
 
   get :all do
