@@ -17,11 +17,9 @@ UncCarpool::App.controllers :volunteer do
   before :except => [:login, :new, :create, :confirm, :reset, :repassword, :passreset, :resetmasu] do
     @user = Volunteer.first(id: session[:uid])
     if !@user
-      return "403"
-    end
-
-    if !@user.confirmed?
-      render('li', locals: {mes: 'volunteer not found'})
+      render('li', locals: {mes: 'not logged in'})
+    elsif !@user.confirmed?
+      render('li', locals: {mes: 'not logged in'})
     end
   end
 
