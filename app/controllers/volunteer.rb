@@ -6,8 +6,12 @@ UncCarpool::App.controllers :volunteer do
   end
 
   get :all do
-    @reqs = Request.all()
-    render 'volunteer/all'
+    if @user.group == :volunteer
+      @reqs = Request.all()
+      render 'volunteer/all'
+    else
+      render('li', locals: {mes: 'not volunteer'})
+    end
   end
 
   get :login do
