@@ -17,9 +17,17 @@ UncCarpool::App.controllers :request do
   end
 
   get :all do
-    @reqs = Volunteer.all(group: :rider).select{|it| !it.parent}
-    all = JSON.dump(@reqs.map{|it| [it.id, it.passengers]}.to_h).html_safe
-    render 'request/all', layout: 'site', locals: {all: all}
+    @user = Volunteer.first(id: session[:uid])
+    if !@user
+      render('li', locals: {mes: 'volunteer not found'})
+    elsif @user.group != :volunteer
+      render('li', locals: {mes: 'error: not a volunteer; should not see all requests'})
+    else
+      @reqs = Volunteer.all(group: :rider).select{|it| !it.parent}
+      all = JSON.dump(@reqs.map{|it| [it.id, it.passengers]}.to_h).html_safe
+      render 'request/all', layout: 'site', locals: {all: all}
+    end
+    
   end
 
   get :edit do
