@@ -70,7 +70,7 @@ UncCarpool::App.controllers :back do
 
 
   HEADERS = %w{
-    Name Gender Weixin Phone Email Grade 分配的志愿者 Group 出发地点 总共拼车人数 总共承载人数
+    Name Gender Weixin Phone Email Grade 匹配的账号 Group 出发地点 总共拼车人数 总共承载人数（所有账号默认 1）
   }
   get :roster_csv do
     res = CSV.generate do |csv|
