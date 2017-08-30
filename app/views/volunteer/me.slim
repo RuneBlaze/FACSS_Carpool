@@ -3,8 +3,9 @@ h1 仪表盘
   .ui.brown.message
     | 当前状态为“不参加活动”，如果要参加活动，请点击本页最下方的“参加活动”按钮。
 - if @user.group == :none
-  h3 你是拼车志愿者，还是需要拼车的参与者？
-  p 你好 #{@user.name}，你已经成功注册，但请麻烦继续完善信息才能让系统帮忙拼车。
+  h3 好了，已经成功登记参加活动了。
+  p 你好 #{@user.name}，如果只是要参加 BBQ 的话你已经 All Set 了！
+  p 如果是这次的志愿者或者需要拼车接送的参与者的话需要继续完善信息。
   .ui.buttons
     / a.ui.button  我需要申请拼车配对
     / .or
@@ -15,7 +16,7 @@ h1 仪表盘
         .content
           .header 我需要拼车配对
         .content
-          .ui.sub.header 我要参加这次活动，同时我需要志愿者把我接到活动场地。
+          .ui.sub.header 我不仅要参加这次活动，我还需要志愿者把我接到活动场地。
         .extra.content
           a.ui.brown.button href="/volunteer/riderize" 对，我需要拼车配对
     .eight.wide.column
@@ -36,8 +37,8 @@ h1 仪表盘
 .ui.dividing.header 当前状态
 - case @user.group
 - when :none
-  p 当前账号已经表示要“参加秋季新生接机”活动，请指明个人身份：接机志愿者或者需要接机的学生。
-  p 请选择上方两个按钮中的一个，登记成为“新生”或者“志愿者”来完善个人信息。
+  p 当前账号已经表示要“参加秋季 BBQ“活动，如果只是要报名参加，不需要拼车的话那么已经登记完成。
+  p 如果有其他需求，请点击上面两个按钮中一个，登记成为“需要拼车者”或者“志愿者”来完善个人信息。
 - when :rider
   - if prt = @user.parent
     .ui.positive.message 已经分配到了志愿者！
